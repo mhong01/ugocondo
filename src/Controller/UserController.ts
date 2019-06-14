@@ -249,8 +249,8 @@ export class UserController extends BaseController {
 					this._User.Email = facebookProfileData.user.email;
 					this._User.id = facebookProfileData.user.uid;
 					this._User.ProfileImage = facebookProfileData.user.providerData[0].photoURL;
-					this._User.Fullname = facebookProfileData.additionalUserInfo.profile.first_name + 
-											facebookProfileData.additionalUserInfo.profile.last_name;
+					this._User.Fullname = (facebookProfileData.additionalUserInfo.profile as any).first_name + 
+											(facebookProfileData.additionalUserInfo.profile as any).last_name;
 
 					await this.CreateUser(this._User);
 
@@ -311,20 +311,21 @@ export class UserController extends BaseController {
 		const appId = ConfigurationConstants.Facebook.FacebookAppID;
 		const permissions = ['public_profile', 'email'];  // Permissions required, consult Facebook docs
 
-		const {
-			type,
-			token,
-		} = await Facebook.logInWithReadPermissionsAsync(
-			appId,
-			{ permissions }
-		);
+		// const {
+		// 	type,
+		// 	token,
+		// } = await Facebook.logInWithReadPermissionsAsync(
+		// 	appId,
+		// 	{ permissions }
+		// );
 
-		let result: FacebookPermissionResult = {
-			Type: type,
-			Token: token
-		}
+		// let result: FacebookPermissionResult = {
+		// 	Type: type,
+		// 	Token: token
+		// }
 
-		return result;
+		//return result;
+		return null;
 	}
 
 	public async SignOutUser() {
