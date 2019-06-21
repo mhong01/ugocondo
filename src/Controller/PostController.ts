@@ -88,9 +88,8 @@ export class PostControllerClass extends BaseController {
 		let post = await this.ReadPost(id);
 		let owner = await UserControllerInstance.ReadUser(post.OwnerID);
 
-		let postViewModelObj = new PostViewModel();
+		let postViewModelObj = new PostModel();
 		postViewModelObj.Update(post);
-		postViewModelObj.Owner = owner;
 
 		return postViewModelObj;
 	}
