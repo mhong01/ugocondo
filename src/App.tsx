@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import * as firebase from "firebase/app";
+import MasterPage from './View/MasterPage';
 
 var firebaseConfig = {
 	apiKey: "AIzaSyCa5x2BrXTxGDe03CnbmO9Hf--sXAKo3k4",
@@ -18,21 +19,7 @@ firebase.initializeApp(firebaseConfig);
 
 const App: React.FC = () => {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload bla.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer">
-					Learn React
-				</a>
-			</header>
-		</div>
+		<MasterPage/>
 	);
 }
 

@@ -1,47 +1,40 @@
 import React from 'react';
+import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-import './MasterPage.css';
-import { CssBaseline, AppBar, Typography, Link, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    // justifyContent: 'flex-end',
-    padding: '0 8px',
-  },
-  title : {
-    flexGrow: 1,
-  },
-  link : {
-    color: '#FFFF',
-    flexGrow: 1,
-  }
-}));
+import stylesModule from './styles/StylesModule';
+import { CssBaseline, AppBar, Typography, Link, makeStyles, IconButton, MenuItem, useTheme } from '@material-ui/core';
 
 export default function MasterPage() {
-  const styles = useStyles("");
+  const styles = stylesModule("");
   
-  return (<div className={styles.container}>
+  return (<div>
     <CssBaseline />
-    <AppBar position="absolute">
-        <Typography component="h1" variant="h6" color="inherit" noWrap className= {styles.title}>
-          UGoCondo
-        </Typography>
-        <Link
-          component="button"
-          variant="body2"
-          className={styles.link}
-          onClick={() => alert("say somehting")}>
-          Register?
-          </Link>
-        <Link
-          component="button"
-          variant="body2"
-          className={styles.link}
-          onClick={() => alert("say somehting")}>
-          Sign-in
-          </Link>
+    <AppBar className={clsx(styles.appBar, {
+          [styles.appBarShift]: true,
+        })} position="absolute">
+        <div className={styles.titlePane}>
+            <Typography component="h1" variant="h6" color="inherit" noWrap>
+               UGoCondo
+            </Typography>   
+        </div>
+        
+        <div className={styles.btnPane}>
+          <Link
+            component="button"
+            variant="body2"
+            className={styles.btnLink}
+            onClick={() => alert("say somehting")}>
+            Register?
+            </Link>
+          <Link
+            component="button"
+            variant="body2"
+            className={styles.btnLink}
+            onClick={() => alert("say somehting")}>
+            Sign-in
+            </Link>
+        </div>
+        
     </AppBar>
   </div>
   );
