@@ -16,7 +16,7 @@ const stylesModule = makeStyles(theme => ({
       justifyContent: 'space-between',
       backgroundColor: primaryColor,
       height: 50,
-    },
+    }, 
 
     appBar:{
       transition: useTheme().transitions.create(['margin', 'width'], {
