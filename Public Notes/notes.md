@@ -3,3 +3,6 @@
 
 ## Example layouts
 - https://material-ui.com/getting-started/page-layout-examples/
+
+## Icons
+- https://material.io/tools/icons/?icon=exit_to_app&style=baseline
