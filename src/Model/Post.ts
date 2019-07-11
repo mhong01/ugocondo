@@ -6,9 +6,9 @@ export class PostModel extends BaseModel {
 	public Description: string = null;
 	public Price: number;
 	public Media: string = null;
-	public IsNegotiable: boolean = false;
-	public State: number = PostStateEnum.Selling;
-	public Condition: ConditionEnum = ConditionEnum.Unknown;
+	public State: number = PostStateEnum.Available;
+	// public Condition: ConditionEnum = ConditionEnum.Unknown;
+	public Condition: string;
 
 	public Item: ItemModel = null;
 
@@ -21,7 +21,6 @@ export class PostModel extends BaseModel {
 		this.Description = (obj.Description != "")? obj.Description : null;
 		this.Price = (obj.Price != null) ? obj.Price : null;
 		this.Media = (obj.Media != null) ? obj.Media : null;
-		this.IsNegotiable = (obj.IsNegotiable != null) ? obj.IsNegotiable : null;
 		this.State = (obj.State != null) ? obj.State : null;
 		this.Item = (obj.Item != null) ? obj.Item : null;
 	}
@@ -53,8 +52,8 @@ export class BookModel extends ItemModel{
 
 export enum PostStateEnum {
 	MarkForDelete = -1,
-	Selling = 1,
-	Sold = 2,
+	Available = 1,
+	Rented = 2,
 }
 
 export enum ConditionEnum {
