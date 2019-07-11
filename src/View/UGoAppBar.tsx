@@ -5,14 +5,13 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import PropTypes from 'prop-types';
 
 export default class UGoAppBar extends React.Component<any, any>{
-    static propTypes: { isUserLoggedIn: PropTypes.Requireable<boolean>; };
-
-    private isUserLoggedIn: boolean= false;
+    static propTypes: { 
+        isUserLoggedIn: PropTypes.Requireable<boolean>; 
+    
+    };
 
     constructor(props){
         super(props);
-        console.log(props.isUserLoggedIn);
-        this.isUserLoggedIn = props.isUserLoggedIn;
         this.state = {
             isUserLoggedIn: false,
             userName: '',
@@ -45,18 +44,15 @@ export default class UGoAppBar extends React.Component<any, any>{
                 marginBottom: 0,
             }
         }) (Typography);
-        console.log(this.state.isUserLoggedIn);
-        // this.isUserLoggedIn;
 
         return(
-            <AppBarBkgn position="absolute" 
-                >
+            <AppBarBkgn position="absolute">
                 <Toolbar>
                 <Typography variant="h4" noWrap>
                     UGoCondo
                 </Typography>
                 {
-                    this.isUserLoggedIn ?
+                    this.state.isUserLoggedIn ?
                     <TypographyUserName paragraph >
                         Hello,
                     </TypographyUserName> : null
