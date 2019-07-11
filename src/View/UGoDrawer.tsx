@@ -1,41 +1,59 @@
 import React from 'react';
+import {Component} from 'react';
 import { withStyles } from "@material-ui/styles";
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Icon } from "@material-ui/core";
-import stylesModule from "./styles/StylesModule";
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from "@material-ui/core";
+import {drawerWidth} from "./styles/StylesModule";
 import Home from '@material-ui/icons/Home';
 import Favorite from '@material-ui/icons/Favorite';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import HowToReg from '@material-ui/icons/HowToReg';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 
-export default function UGoDrawer(){
-    const styles = stylesModule("");
+class UGoDrawer extends Component{
+  static propTypes: {};
+  constructor(props){
+    super(props);
+  }
+
+  navigateHome(){
+
+  }
+
+  navigateFavourite(){
+
+  }
+
+  render(){
     const ClippedDrawer = withStyles({
-        root:{
-          top: 0,
-          flex: '1 0 auto',
-          height: '100%',
-          display: 'flex',
-          outline: 'none',
-          position: 'fixed',
-          overflowY: 'auto',
-          flexDirection: 'column',
-        },
-        paper: {
-          width: 240,
-        },
-      })(Drawer);
-return (
-      <ClippedDrawer
-        className={styles.drawer}
-        variant="permanent" >
-        <div className={styles.toolbar} />
+      root:{
+        top: 0,
+        flex: '1 0 auto',
+        height: '100%',
+        display: 'flex',
+        outline: 'none',
+        position: 'fixed',
+        overflowY: 'auto',
+        flexDirection: 'column',
+      },
+      paper: {
+        width: drawerWidth,
+      },
+    })(Drawer);
+
+    const styles_ =  {
+      toolbar:{
+        minHeight: 64,
+      } 
+    }
+    return(
+      <ClippedDrawer  variant="permanent">
+        <div style={styles_.toolbar} />
         <List>
-            <ListItem button >
+      <ListItem button onClick={() => this.navigateHome()}>
               <ListItemIcon><Home/></ListItemIcon>
-              <ListItemText primary="Homepage" />
+              <ListItemText primary="Homepage"/> 
             </ListItem>
-            <ListItem button >
+            <ListItem button onClick={() => this.navigateFavourite()}>
               <ListItemIcon><Favorite/></ListItemIcon>
               <ListItemText primary="Favorite List" />
             </ListItem>
@@ -57,5 +75,12 @@ return (
         </List>
       </ClippedDrawer>
     );
-      
+  }
 }
+
+
+UGoDrawer.propTypes = {
+  
+}
+
+export default UGoDrawer;
