@@ -135,7 +135,7 @@ export class PostControllerClass extends BaseController {
 				contentType: 'image/jpeg'
 			};
 			let result = await fileRef.put(blob, metadata);
-			blob.close();
+			// blob.close();
 
 			return await result.ref.getDownloadURL();
 
