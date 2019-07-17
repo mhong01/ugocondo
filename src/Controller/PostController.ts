@@ -211,7 +211,7 @@ export class PostControllerClass extends BaseController {
 		try {
 			let result = await this._Collection
 				.where("OwnerID", "==", id)
-				.where("State", "==", PostStateEnum.Selling)
+				.where("State", "==", PostStateEnum.Available)
 				.limit(40).get();
 			let data = this.ConvertToPostViewModel(result);
 			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
@@ -228,7 +228,7 @@ export class PostControllerClass extends BaseController {
 		try {
 			let result = await this._Collection
 				.where("OwnerID", "==", id)
-				.where("State", "==", PostStateEnum.Sold)
+				.where("State", "==", PostStateEnum.Rented)
 				.limit(40).get();
 			let data = this.ConvertToPostViewModel(result);
 			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
@@ -255,7 +255,7 @@ export class PostControllerClass extends BaseController {
 		////console.log("In MarkSold");
 		try {
 			await this._Collection.doc(id).update({
-				State: PostStateEnum.Sold
+				State: PostStateEnum.Rented
 			});
 		} catch (e) {
 			//console.log(e);
@@ -266,7 +266,7 @@ export class PostControllerClass extends BaseController {
 		////console.log("In MarkSold");
 		try {
 			await this._Collection.doc(id).update({
-				State: PostStateEnum.Selling
+				State: PostStateEnum.Available
 			});
 		} catch (e) {
 			//console.log(e);
