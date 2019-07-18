@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import * as firebase from "firebase/app";
 import HomePageModule from './View/HomePage';
+import 'semantic-ui-css/semantic.min.css';
 
 var firebaseConfig = {
 	apiKey: "AIzaSyCa5x2BrXTxGDe03CnbmO9Hf--sXAKo3k4",
