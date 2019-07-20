@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 
-class FavoritePage extends Component{
+class FavoritePage extends Component<any,any>{
 
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        return(<div>
+            'hello'
+        </div>);
+    }
 
 }
 

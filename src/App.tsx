@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import * as firebase from "firebase/app";
 import HomePageModule from './View/HomePage';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import FavoritePage from './View/FavoritePage';
+import { ListItem } from '@material-ui/core';
 
 var firebaseConfig = {
 	apiKey: "AIzaSyCa5x2BrXTxGDe03CnbmO9Hf--sXAKo3k4",
@@ -19,7 +22,14 @@ firebase.initializeApp(firebaseConfig);
 
 const App: React.FC = () => {
 	return (
-		<HomePageModule/>
+		// <HomePageModule/>
+		<BrowserRouter>
+			<Route path='/' component={HomePageModule}></Route>
+			<Switch>
+				<Route path='/favorite' component={FavoritePage}></Route>
+				<Route path='/items' component={ListItem}></Route>
+			</Switch>
+        </BrowserRouter>
 	);
 }
 
