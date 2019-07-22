@@ -1,28 +1,37 @@
 import { BaseModel } from "./Base";
 
 export class PostModel extends BaseModel {
-	public Title: string;
 	public OwnerID: string = null;
-	public Description: string = null;
-	public Price: number;
-	public Media: string = null;
-	public State: number = PostStateEnum.Available;
+	public PropertyName:  string;
 	// public Condition: ConditionEnum = ConditionEnum.Unknown;
-	public Condition: string;
-
-	public Item: ItemModel = null;
+	public Unit: string;
+	public Address: string;
+	public City: string;
+	public ProvinceState: string;
+	public Country: string;
+	public Zip: string;
+	public Area: number;
+	public NumOfBed: number;
+	public NumOfBath: number;
+	public NumOfParking: number;
+	public ParkingType: string;
 
 	// Deep copy
 	public Update(obj: PostModel) {
 		super.Update(obj);
 
-		this.Title = (obj.Title != "") ? obj.Title : null;
-		this.OwnerID = (obj.OwnerID != "") ? obj.OwnerID : null;
-		this.Description = (obj.Description != "")? obj.Description : null;
-		this.Price = (obj.Price != null) ? obj.Price : null;
-		this.Media = (obj.Media != null) ? obj.Media : null;
-		this.State = (obj.State != null) ? obj.State : null;
-		this.Item = (obj.Item != null) ? obj.Item : null;
+		this.PropertyName = (obj.PropertyName != null) ? obj.PropertyName : null;
+		this.Unit = (obj.Unit != null) ? obj.Unit : null;
+		this.Address = (obj.Address != null) ? obj.Address : null;
+		this.City = (obj.City != null) ? obj.City : null;
+		this.ProvinceState = (obj.ProvinceState != null) ? obj.ProvinceState : null;
+		this.Country = (obj.Country != null) ? obj.Country : null;
+		this.Zip = (obj.Zip != null) ? obj.Zip : null;
+		this.Area = (obj.Area != null) ? obj.Area : null;
+		this.NumOfBed = (obj.NumOfBed != null) ? obj.NumOfBed : null;
+		this.NumOfBath = (obj.NumOfBath != null) ? obj.NumOfBath : null;
+		this.NumOfParking = (obj.NumOfParking != null) ? obj.NumOfParking : null;
+		this.ParkingType = (obj.ParkingType != null) ? obj.ParkingType : null;
 	}
 }
 
