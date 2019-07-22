@@ -36,40 +36,50 @@ export class PostControllerClass extends BaseController {
 	}
 
 	// Precondition: all post data is added through setter
-	public async CreatePost(): Promise<string> {
-		////console.log("In CreatePost");
+	public async CreatePost(data: PostModel): Promise<string> {
+		console.log("In CreatePost");
 
 		// 1. Create post in db to get id
-		let result;
-		let newPost = new PostModel();
-		newPost.Title = this._NewPostTitle;
-		newPost.Price = this._NewPostPrice;
-		newPost.OwnerID = UserControllerInstance.UserID;
-		newPost.CreatedAt = firebase.firestore.Timestamp.fromDate(new Date());
-		newPost.UpdatedAt = firebase.firestore.Timestamp.fromDate(new Date());
+		let newHouse = new PostModel();
+		newHouse.PropertyName = data.PropertyName;
+		newHouse.Unit = data.Unit;
+		newHouse.Address = data.Address;
+		newHouse.City = data.City;
+		newHouse.ProvinceState = data.ProvinceState;
+		newHouse.Country = data.Country;
+		newHouse.Zip = data.Zip;
+		newHouse.Area = data.Area;
+		newHouse.NumOfBed = data.NumOfBed;
+		newHouse.NumOfBath = data.NumOfBath;
+		newHouse.NumOfParking = data.NumOfParking;
+		newHouse.ParkingType = data.ParkingType;
+		newHouse.CreatedAt = firebase.firestore.Timestamp.fromDate(new Date());
+		newHouse.UpdatedAt = firebase.firestore.Timestamp.fromDate(new Date());
 
 		try {
 			let postRef = await this._DatabaseRef.collection(this.DatabaseCollectionName.Posts).doc();
-			newPost.id = postRef.id;
+			newHouse.id = postRef.id;
 
-			postRef.set(Object.assign({}, newPost));
+			await postRef.set(Object.assign({}, newHouse));
+			console.log("done	")
+			
 		} catch (error) {
 
-			//console.log(error);
+			console.log(error);
 			return null;
 		}
 
 		// 2. Post id as file name
-		let fullPath = await this.UploadImage(newPost.id);
-		if (fullPath == null) return null;
+		// let fullPath = await this.UploadImage(newHouse.id);
+		// if (fullPath == null) return null;
 
 		// 3. Update the post with the new
-		if (fullPath != null) {
-			newPost.Media = fullPath;
-			await this.UpdatePost(newPost);
-		}
+		// if (fullPath != null) {
+		// 	newHouse.Media = fullPath;
+		// 	await this.UpdatePost(newHouse);
+		// }
 
-		return newPost.id;
+		return newHouse.id;
 	}
 
 	public async ReadPost(id: string) {
@@ -171,9 +181,9 @@ export class PostControllerClass extends BaseController {
 				////console.log(doc.data());
 				let docData = doc.data() as PostModel;
 				// Work around when a post is not correct save to database
-				if (docData.Media != null) {
-					data.push(doc.data() as PostModel);
-				}
+				// if (docData.Media != null) {
+				// 	data.push(doc.data() as PostModel);
+				// }
 			});
 
 			////console.log(data);
@@ -280,9 +290,9 @@ export class PostControllerClass extends BaseController {
 			////console.log(doc.data());
 			let docData = doc.data() as PostModel;
 			// Work around when a post is not correct save to database
-			if (docData.Media != null) {
-				data.push(doc.data() as PostModel);
-			}
+			// if (docData.Media != null) {
+			// 	data.push(doc.data() as PostModel);
+			// }
 		});
 		return data;
 	}

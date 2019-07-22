@@ -8,6 +8,7 @@ import Favorite from '@material-ui/icons/Favorite';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import HowToReg from '@material-ui/icons/HowToReg';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import AddBoxOutlined from '@material-ui/icons/AddBoxOutlined';
 
 class UGoDrawer extends Component{
   static propTypes: {};
@@ -69,6 +70,10 @@ class UGoDrawer extends Component{
               <ListItemText primary="Register" />
             </ListItem>
             <ListItem button>
+                <ListItemIcon><AddBoxOutlined/></ListItemIcon>
+              <ListItemText primary="Add House" />
+            </ListItem>
+			<ListItem button>
                 <ListItemIcon><ExitToApp/></ListItemIcon>
               <ListItemText primary="Log-out" />
             </ListItem>

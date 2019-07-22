@@ -1,7 +1,5 @@
 import firebase from 'firebase';
-require("firebase/firestore");
-
-import firebase_exports from '../../firebase-exports';
+import firebase_exports from '../firebase-exports';
 import { Base } from '../Base';
 firebase.initializeApp(firebase_exports);
 
