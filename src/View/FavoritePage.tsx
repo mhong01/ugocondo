@@ -12,6 +12,7 @@ class FavoritePage extends Component<any,any>{
         </div>);
     }
 
+
 }
 
 

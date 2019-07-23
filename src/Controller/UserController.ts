@@ -3,7 +3,7 @@ import { UserModel } from '../Model/User';
 import { AsyncStorageHelper } from '../AsyncStorageHelper';
 import BaseController from './BaseController';
 import firebase from 'firebase';
-import { ConfigurationConstants } from '../../configure';
+import { ConfigurationConstants } from '../configure';
 
 export class UserController extends BaseController {
 	private _AuthRef = firebase.auth();
@@ -74,7 +74,8 @@ export class UserController extends BaseController {
 
 			//console.log(result);
 			//console.log("Create User Success")
-			this._User.id;
+			
+			return this._User.id;
 		} catch (error) {
 			//console.log("Error confirm");
 			//console.log(error);
@@ -162,7 +163,7 @@ export class UserController extends BaseController {
 
 			//console.log(result);
 			//console.log("Create User Success")
-			this._User.id;
+			return this._User.id;
 		} catch (error) {
 			//console.log("Error confirm");
 			//console.log(error);
