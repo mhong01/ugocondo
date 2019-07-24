@@ -5,6 +5,7 @@ import { Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from "@ma
 import {drawerWidth} from "./styles/StylesModule";
 import Home from '@material-ui/icons/Home';
 import Favorite from '@material-ui/icons/Favorite';
+import Add from '@material-ui/icons/Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import HowToReg from '@material-ui/icons/HowToReg';
 import ExitToApp from '@material-ui/icons/ExitToApp';
@@ -57,7 +58,7 @@ class UGoDrawer extends Component{
     return(
       <ClippedDrawer  variant="permanent">
         <div style={styles.toolbar} />
-        <BrowserRouter>
+        {/* <BrowserRouter> */}
         <List>
             <ListItem component={Link}
                       {...{ to: '/' } as any} 
@@ -70,6 +71,12 @@ class UGoDrawer extends Component{
                       button>
               <ListItemIcon><Favorite/></ListItemIcon>
               <ListItemText primary="Favorite List" />
+            </ListItem>
+            <ListItem component={Link}
+                      {...{ to: '/postNewHome' } as any }
+                      button>
+              <ListItemIcon><Add/></ListItemIcon>
+              <ListItemText primary="Post New Home" />
             </ListItem>
         </List>
         <Divider />
@@ -88,15 +95,10 @@ class UGoDrawer extends Component{
             </ListItem>
         </List>
         
-      <main style={styles.content}>
-        <div style={styles.toolbar} />
-        <UGoRouter/>
-        {/* <Switch>
-            <Route path='/' component={ListItem}></Route>
-            <Route path='/favorite' component={FavoritePage}></Route>
-        </Switch> */}
-      </main>
-        </BrowserRouter>
+        <main style={styles.content}>
+          <div style={styles.toolbar} />
+          
+        </main>
       </ClippedDrawer>
     );
   }
