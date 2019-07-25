@@ -10,6 +10,8 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import { CSSProperties, makeStyles } from '@material-ui/styles';
 import FavoritePage from './FavoritePage';
 import ListItem from './ListItem';
+import LoginPage from './LoginPage';
+import RegisterPage from './Register';
 
 export default class HomePage extends React.Component<any> {
 
@@ -50,6 +52,8 @@ export default class HomePage extends React.Component<any> {
                 <Route exact path='/' component={ListItem}></Route>
                 <Route exact path='/postNewHome' component={AddHome}></Route>
                 <Route path='/favorite' component={FavoritePage}></Route>
+                <Route path='/login' component={LoginPage}></Route>
+                <Route path='/register' component={RegisterPage}></Route>
             </Switch>
           </main>
         </BrowserRouter>
