@@ -1,11 +1,34 @@
 import React, { Component } from "react";
 import { Grid, Paper } from "@material-ui/core";
 import { spacing } from "@material-ui/system";
+import PostControllerInstance from "../Controller/PostController";
+import { PostModel } from "../Model/Post";
 
-export default class ListItem extends React.Component<any,any>{
+export default class ListItem extends React.Component{
+
+    private latestPosts : Array<any>;
 
     constructor(props){
         super(props);
+    }
+
+    componentDidMount(){
+        // if (this.latestPosts == null || this.latestPosts == undefined){
+        //     //TODO: pop up msg for error
+        //     return;  
+        // } else {
+
+        // }
+
+        let _latestPosts = PostControllerInstance.GetLatestPosts();
+        for (let post in _latestPosts){
+            this.latestPosts.push(post);
+            console.log(post);
+        }
+    }
+
+    async getAllLatestPost(){
+        return await PostControllerInstance.GetLatestPosts();
     }
 
     render(){
