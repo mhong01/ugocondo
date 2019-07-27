@@ -50,7 +50,7 @@ export default class HomePage extends React.Component<any> {
             <div style={styles_.toolbar} />
             <Switch>
                 <Route exact path='/' component={ListItem}></Route>
-                <Route exact path='/postNewHome' component={AddHome}></Route>
+                <Route path='/postNewHome' component={AddHome}></Route>
                 <Route path='/favorite' component={FavoritePage}></Route>
                 <Route path='/login' component={LoginPage}></Route>
                 <Route path='/register' component={RegisterPage}></Route>
