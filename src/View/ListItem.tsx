@@ -5,25 +5,28 @@ import PostControllerInstance from "../Controller/PostController";
 import { PostModel } from "../Model/Post";
 import PostItem from "./PostItem";
 
-export default class ListItem extends React.Component{
+export default class ListItem extends React.Component<any, any, any>{
 
-    private latestPosts : Array<PostModel>;
-    private post: PostModel;
+    private latestPosts : Array<any>;
 
     constructor(props){
         super(props);
-        // this.latestPosts = new Array(5);
-        this.initFakeHome();
+        // this.initFakeHome();
+        this.latestPosts = new Array();
+        this.state = {
+            latestPost : Array,
+        }
+        
     }
 
-    async componentDidMount(){
-    }
-
-    componentWillMount(){
-    }
-
-    async getAllLatestPost(){
-        return await PostControllerInstance.GetLatestPosts();
+    async componentWillMount(){
+        // let latestPosts = await this.getAllLatestPost();
+        let latestPosts =  await PostControllerInstance.GetPostsByUserID("testuser");
+        console.log(latestPosts);
+        this.setState({
+            latestPost: latestPosts,
+        })
+        console.log(this.state.latestPost);
     }
 
     initFakeHome(){
@@ -47,6 +50,11 @@ export default class ListItem extends React.Component{
         }
     }
 
+    async getAllLatestPost(){
+        return await PostControllerInstance.GetLatestPosts();
+        // return await PostControllerInstance.GetPostsByUserID("testuser");
+    }
+
     render(){
         var styles = {
             _root:{
@@ -61,12 +69,8 @@ export default class ListItem extends React.Component{
         return(
             <div style={styles._root}>
                 <Grid container spacing={3}>
-                    <Grid item xs={4}>
-                        <PostItem Post={this.latestPosts[0]} 
-                            key={this.latestPosts[0].id}/>
-                    </Grid>
-                    <Grid item xs={4}>
-                    <div>dddd</div>
+                    <Grid item xs={6}>
+                        <PostItem Post={this.latestPosts[0]}/>
                     </Grid>
                 </Grid>
             </div>

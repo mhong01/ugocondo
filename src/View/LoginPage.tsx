@@ -13,7 +13,6 @@ class LoginPage extends React.Component<any>
 	render() {
 		return (
 			<Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div >
         <Typography component="h1" variant="h5">
           Sign in
@@ -49,9 +48,7 @@ class LoginPage extends React.Component<any>
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
-           
-          >
+            color="primary">
             Sign In
           </Button>
           <Grid container>

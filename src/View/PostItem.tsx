@@ -1,11 +1,11 @@
 import React from "react";
 import { PostModel } from "../Model/Post";
 
-class PostItem extends React.Component <any, any>{
+class PostItem extends React.Component <any, any, any>{
 
     static propTypes: { 
         Post: PostModel;
-        key: string;
+        // key: string;
     };
     //Passing a PostModel here and populate data
     private post:PostModel; 

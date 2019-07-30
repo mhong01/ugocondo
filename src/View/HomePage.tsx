@@ -12,6 +12,8 @@ import FavoritePage from './FavoritePage';
 import ListItem from './ListItem';
 import EditHome from './HomeCRUD/EditHome';
 import MyPage from './MyPage';
+import RegisterPage from './Register';
+import LoginPage from './LoginPage';
 
 export default class HomePage extends React.Component<any> {
 
@@ -53,6 +55,9 @@ export default class HomePage extends React.Component<any> {
 							<Route exact path='/postNewHome' component={AddHome}></Route>
 							<Route path='/favorite' component={FavoritePage}></Route>
 							<Route path='/my' component={MyPage}></Route>
+							<Route path='/login' component={LoginPage}></Route>
+							<Route path='/signup' component={RegisterPage}></Route>
+							<Route path='/logout' component={ListItem}></Route>
 						</Switch>
 					</main>
 				</BrowserRouter>
