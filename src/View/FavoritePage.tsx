@@ -8,9 +8,11 @@ class FavoritePage extends Component{
     }
 
     render(){
-        return(<div>
+        return(
+        <div>
             
-        </div>);
+        </div>
+        );
     }
 
 

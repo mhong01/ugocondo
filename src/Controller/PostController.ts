@@ -175,7 +175,8 @@ export class PostControllerClass extends BaseController {
 			let data = this.ConvertToPostViewModel(result);
 			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
-			console.log(result);
+			console.log("result" + result);
+			console.log("----" + data);
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -184,20 +185,14 @@ export class PostControllerClass extends BaseController {
 	}
 
 	public async GetLatestPosts() {
-		////console.log("In GetLatestPosts");
+		console.log("In GetLatestPosts");
 		try {
 			let result = await this._Collection.orderBy('CreatedAt', 'desc').limit(40).get();
-			let data = new Array<PostModel>();
-			result.forEach(function (doc) {
-				////console.log(doc.data());
-				let docData = doc.data() as PostModel;
-				// Work around when a post is not correct save to database
-				// if (docData.Media != null) {
-				// 	data.push(doc.data() as PostModel);
-				// }
-			});
+			let data = this.ConvertToPostViewModel(result);
+			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
-			////console.log(data);
+			console.log("result" + result);
+			console.log("----" + data);
 			return data;
 		} catch (error) {
 			//console.log(error);
@@ -298,12 +293,13 @@ export class PostControllerClass extends BaseController {
 	private ConvertToPostViewModel(result: firebase.firestore.QuerySnapshot) {
 		let data = new Array<PostModel>();
 		result.forEach(function (doc) {
-			////console.log(doc.data());
+			console.log(doc.data());
 			let docData = doc.data() as PostModel;
 			// Work around when a post is not correct save to database
-			// if (docData.Media != null) {
-			// 	data.push(doc.data() as PostModel);
-			// }
+			if (docData != null) {
+				data.push(doc.data() as PostModel);
+			}
+			console.log(docData);
 		});
 		return data;
 	}

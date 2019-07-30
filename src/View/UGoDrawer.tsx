@@ -87,15 +87,18 @@ class UGoDrawer extends Component{
         </List>
         <Divider />
         <List>
-            <ListItem button>
+            <ListItem component={Link}
+                      {...{ to: '/login' } as any } button>
                 <ListItemIcon><AccountCircle/></ListItemIcon>
               <ListItemText primary="Log-in" />
             </ListItem>
-            <ListItem button>
+            <ListItem component={Link}
+                      {...{ to: '/signup' } as any } button>
                 <ListItemIcon><HowToReg/></ListItemIcon>
               <ListItemText primary="Register" />
             </ListItem>
-            <ListItem button>
+            <ListItem component={Link}
+                      {...{ to: '/logout' } as any } button>
                 <ListItemIcon><ExitToApp/></ListItemIcon>
               <ListItemText primary="Log-out" />
             </ListItem>
