@@ -225,7 +225,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						id="standard-name"
 						label="Parking Type"
 						margin="normal"
-						type="number"
+						type="text"
 						style={{ ...Styles.DoubleInput, ...Styles.RightInput }}
 						onChange={(e) => this.setState({ ParkingType: e.currentTarget.value })}
 						helperText={this.state.ParkingTypeCheck}
