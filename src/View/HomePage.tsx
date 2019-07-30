@@ -10,6 +10,8 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import { CSSProperties, makeStyles } from '@material-ui/styles';
 import FavoritePage from './FavoritePage';
 import ListItem from './ListItem';
+import EditHome from './HomeCRUD/EditHome';
+import MyPage from './MyPage';
 
 export default class HomePage extends React.Component<any> {
 
@@ -42,17 +44,18 @@ export default class HomePage extends React.Component<any> {
 		return (
 			<div style={styles.Container}>
 				<UGoAppBar />
-        <BrowserRouter>
-          <UGoDrawer />
-          <main style={styles.Main}>
-            <div style={styles_.toolbar} />
-            <Switch>
-                <Route exact path='/' component={ListItem}></Route>
-                <Route exact path='/postNewHome' component={AddHome}></Route>
-                <Route path='/favorite' component={FavoritePage}></Route>
-            </Switch>
-          </main>
-        </BrowserRouter>
+				<BrowserRouter>
+					<UGoDrawer />
+					<main style={styles.Main}>
+						<div style={styles_.toolbar} />
+						<Switch>
+							<Route exact path='/' component={ListItem}></Route>
+							<Route exact path='/postNewHome' component={AddHome}></Route>
+							<Route path='/favorite' component={FavoritePage}></Route>
+							<Route path='/my' component={MyPage}></Route>
+						</Switch>
+					</main>
+				</BrowserRouter>
 			</div>
 		);
 	}

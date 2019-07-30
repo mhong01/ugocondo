@@ -119,6 +119,17 @@ export class PostControllerClass extends BaseController {
 		}
 	}
 
+	public async DeletePost(id: string) {
+		console.log("In UpdatePost");
+		try {
+			let result = await this._Collection
+				.doc(id)
+				.delete();
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	// Precondition, this.NewPostImageBase64 is assign with valid and correct
 	// base64 image
 	private async UploadImage(fileName: string) {
@@ -158,16 +169,16 @@ export class PostControllerClass extends BaseController {
 	// Get
 
 	public async GetPostsByUserID(id: string) {
-		//console.log("In GetPostsByUserID: " + id);
+		console.log("In GetPostsByUserID: " + id);
 		try {
 			let result = await this._Collection.where("OwnerID", "==", id).limit(40).get();
 			let data = this.ConvertToPostViewModel(result);
 			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
-			//console.log(data);
+			console.log(result);
 			return data;
 		} catch (error) {
-			//console.log(error);
+			console.log(error);
 			return null;
 		}
 	}

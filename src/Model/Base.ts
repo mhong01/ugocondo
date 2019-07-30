@@ -9,7 +9,7 @@ export class BaseModel {
 
 	public Update(obj: BaseModel) {
 		this.id = obj.id;
-		this.CreatedAt = obj.CreatedAt;
+		this.CreatedAt = firebase.firestore.Timestamp.fromDate(new Date());
 		this.UpdatedAt = firebase.firestore.Timestamp.fromDate(new Date());
 		this.MakedForDelete = obj.MakedForDelete;
 	}

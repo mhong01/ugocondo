@@ -72,6 +72,12 @@ class UGoDrawer extends Component{
               <ListItemIcon><Favorite/></ListItemIcon>
               <ListItemText primary="Favorite List" />
             </ListItem>
+			<ListItem component={Link}
+                      {...{ to: '/my' } as any }
+                      button>
+              <ListItemIcon><Favorite/></ListItemIcon>
+              <ListItemText primary="My List" />
+            </ListItem>
             <ListItem component={Link}
                       {...{ to: '/postNewHome' } as any }
                       button>

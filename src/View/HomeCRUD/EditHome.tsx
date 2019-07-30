@@ -4,11 +4,13 @@ import { Input } from 'semantic-ui-react'
 import PostControllerInstance from '../../Controller/PostController';
 import { PostModel } from '../../Model/Post';
 
-export default class AddHome extends React.Component<any, any, any>{
+export default class EditHome extends React.Component<any, any, any>{
+
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			id: this.props.HomeID,
 			PropertyName: null,
 			Unit: null,
 			Address: null,
@@ -35,73 +37,98 @@ export default class AddHome extends React.Component<any, any, any>{
 			ParkingTypeCheck: null
 		}
 
-		this.OnAddHouseClick = this.OnAddHouseClick.bind(this)
+		this.OnSaveHouseClick = this.OnSaveHouseClick.bind(this)
+		this.OnDeleteHouseClick = this.OnDeleteHouseClick.bind(this)
 	}
 
-	OnAddHouseClick() {
+	async componentWillMount() {
+		this.GetHome();
+	}
+
+	async GetHome() {
+		let house = await PostControllerInstance.ReadPost(this.state.id);
+		this.setState({id: house.id})
+		this.setState({PropertyName: house.PropertyName})
+		this.setState({Unit: house.Unit})
+		this.setState({Address: house.Address})
+		this.setState({City: house.City})
+		this.setState({ProvinceState: house.ProvinceState})
+		this.setState({Country: house.Country})
+		this.setState({Zip: house.Zip})
+		this.setState({Area: house.Area})
+		this.setState({NumOfBed: house.NumOfBed})
+		this.setState({NumOfBath: house.NumOfBath})
+		this.setState({NumOfParking: house.NumOfParking})
+		this.setState({ParkingType: house.ParkingType})
+
+		this.setState({hasData: true})
+	}
+
+	OnSaveHouseClick() {
 		console.log(this.state)
-		if(this.state.PropertyName == null) {
-			this.setState({PropertyNameCheck: "Cannot be empty!"});
+		if (this.state.PropertyName == null) {
+			this.setState({ PropertyNameCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.Unit == null) {
-			this.setState({UnitCheck: "Cannot be empty!"});
+		if (this.state.Unit == null) {
+			this.setState({ UnitCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.Address == null) {
-			this.setState({AddressCheck: "Cannot be empty!"});
+		if (this.state.Address == null) {
+			this.setState({ AddressCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.City == null) {
-			this.setState({CityCheck: "Cannot be empty!"});
+		if (this.state.City == null) {
+			this.setState({ CityCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.ProvinceState == null) {
-			this.setState({ProvinceStateCheck: "Cannot be empty!"});
+		if (this.state.ProvinceState == null) {
+			this.setState({ ProvinceStateCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.Country == null) {
-			this.setState({CountryCheck: "Cannot be empty!"});
+		if (this.state.Country == null) {
+			this.setState({ CountryCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.Zip == null) {
-			this.setState({ZipCheck: "Cannot be empty!"});
+		if (this.state.Zip == null) {
+			this.setState({ ZipCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.Area == null) {
-			this.setState({AreaCheck: "Cannot be empty!"});
+		if (this.state.Area == null) {
+			this.setState({ AreaCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.NumOfBed == null) {
-			this.setState({NumOfBedCheck: "Cannot be empty!"});
+		if (this.state.NumOfBed == null) {
+			this.setState({ NumOfBedCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.NumOfBath == null) {
-			this.setState({NumOfBathCheck: "Cannot be empty!"});
+		if (this.state.NumOfBath == null) {
+			this.setState({ NumOfBathCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.NumOfParking == null) {
-			this.setState({NumOfParkingCheck: "Cannot be empty!"});
+		if (this.state.NumOfParking == null) {
+			this.setState({ NumOfParkingCheck: "Cannot be empty!" });
 			return;
 		}
 
-		if(this.state.ParkingType == null) {
-			this.setState({ParkingTypeCheck: "Cannot be empty!"});
+		if (this.state.ParkingType == null) {
+			this.setState({ ParkingTypeCheck: "Cannot be empty!" });
 			return;
 		}
-		
+
 
 		let newHouse = new PostModel();
+		newHouse.id = this.state.id;
 		newHouse.PropertyName = this.state.PropertyName;
 		newHouse.Unit = this.state.Unit;
 		newHouse.Address = this.state.Address;
@@ -115,7 +142,11 @@ export default class AddHome extends React.Component<any, any, any>{
 		newHouse.NumOfParking = this.state.NumOfParking;
 		newHouse.ParkingType = this.state.ParkingType;
 
-		PostControllerInstance.CreatePost(newHouse)
+		PostControllerInstance.UpdatePost(newHouse)
+	}
+
+	OnDeleteHouseClick() {
+		PostControllerInstance.DeletePost(this.state.id)
 	}
 
 	render() {
@@ -126,6 +157,7 @@ export default class AddHome extends React.Component<any, any, any>{
 					label="Property name"
 					margin="normal"
 					style={Styles.SingleInput}
+					value={this.state.PropertyName}
 					onChange={(e) => this.setState({ PropertyName: e.currentTarget.value })}
 					helperText={this.state.PropertyNameCheck}
 				/>
@@ -135,6 +167,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						label="Unit"
 						margin="normal"
 						style={{ ...Styles.DoubleInput, ...Styles.LeftInput_3 }}
+						value={this.state.Unit}
 						onChange={(e) => this.setState({ Unit: e.currentTarget.value })}
 						helperText={this.state.UnitCheck}
 					/>
@@ -143,6 +176,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						label="Address"
 						margin="normal"
 						style={{ ...Styles.DoubleInput, ...Styles.RightInput_7 }}
+						value={this.state.Address}
 						onChange={(e) => this.setState({ Address: e.currentTarget.value })}
 						helperText={this.state.AddressCheck}
 					/>
@@ -153,6 +187,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						label="City"
 						margin="normal"
 						style={{ ...Styles.DoubleInput, ...Styles.LeftInput }}
+						value={this.state.City}
 						onChange={(e) => this.setState({ City: e.currentTarget.value })}
 						helperText={this.state.CityCheck}
 					/>
@@ -161,6 +196,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						label="Province/State"
 						margin="normal"
 						style={{ ...Styles.DoubleInput, ...Styles.RightInput }}
+						value={this.state.ProvinceState}
 						onChange={(e) => this.setState({ ProvinceState: e.currentTarget.value })}
 						helperText={this.state.ProvinceStateCheck}
 					/>
@@ -171,6 +207,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						label="Country"
 						margin="normal"
 						style={{ ...Styles.DoubleInput, ...Styles.LeftInput }}
+						value={this.state.Country}
 						onChange={(e) => this.setState({ Country: e.currentTarget.value })}
 						helperText={this.state.CountryCheck}
 					/>
@@ -179,6 +216,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						label="Zip"
 						margin="normal"
 						style={{ ...Styles.DoubleInput, ...Styles.RightInput }}
+						value={this.state.Zip}
 						onChange={(e) => this.setState({ Zip: e.currentTarget.value })}
 						helperText={this.state.ZipCheck}
 					/>
@@ -188,6 +226,7 @@ export default class AddHome extends React.Component<any, any, any>{
 					label="Area"
 					margin="normal"
 					style={Styles.SingleInput}
+					value={this.state.Area}
 					onChange={(e) => this.setState({ Area: e.currentTarget.value })}
 					helperText={this.state.AreaCheck}
 				/>
@@ -198,6 +237,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						margin="normal"
 						type="number"
 						style={{ ...Styles.DoubleInput, ...Styles.LeftInput }}
+						value={this.state.NumOfBed}
 						onChange={(e) => this.setState({ NumOfBed: e.currentTarget.value })}
 						helperText={this.state.NumOfBedCheck}
 					/>
@@ -207,6 +247,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						margin="normal"
 						type="number"
 						style={{ ...Styles.DoubleInput, ...Styles.RightInput }}
+						value={this.state.NumOfBath}
 						onChange={(e) => this.setState({ NumOfBath: e.currentTarget.value })}
 						helperText={this.state.NumOfBathCheck}
 					/>
@@ -218,6 +259,7 @@ export default class AddHome extends React.Component<any, any, any>{
 						margin="normal"
 						type="number"
 						style={{ ...Styles.DoubleInput, ...Styles.LeftInput }}
+						value={this.state.NumOfParking}
 						onChange={(e) => this.setState({ NumOfParking: e.currentTarget.value })}
 						helperText={this.state.NumOfParkingCheck}
 					/>
@@ -227,14 +269,20 @@ export default class AddHome extends React.Component<any, any, any>{
 						margin="normal"
 						type="text"
 						style={{ ...Styles.DoubleInput, ...Styles.RightInput }}
+						value={this.state.ParkingType}
 						onChange={(e) => this.setState({ ParkingType: e.currentTarget.value })}
 						helperText={this.state.ParkingTypeCheck}
 					/>
 				</div>
 
-				<Button onClick={this.OnAddHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
-					Add House
-				</Button>
+				<div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%"}}>
+					<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
+						Edit House
+					</Button>
+					<Button onClick={this.OnDeleteHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
+						Delete House
+					</Button>
+				</div>
 			</div>
 		);
 	}
