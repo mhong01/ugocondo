@@ -51,11 +51,11 @@ export class BookModel extends ItemModel{
 
 	public Update(obj: BookModel) {
 		
-		this.ProgramCode = (obj.ProgramCode != "") ? obj.ProgramCode : null;
-		this.ClassCode = (obj.ClassCode != "") ? obj.ClassCode : null;
-		this.ClassName = (obj.ClassName != "") ? obj.ClassName : null;
-		this.Author = (obj.Author != "") ? obj.Author : null;
-		this.Isbn = (obj.Isbn != "") ? obj.Isbn : null;
+		this.ProgramCode = (obj.ProgramCode !== "") ? obj.ProgramCode : null;
+		this.ClassCode = (obj.ClassCode !== "") ? obj.ClassCode : null;
+		this.ClassName = (obj.ClassName !== "") ? obj.ClassName : null;
+		this.Author = (obj.Author !== "") ? obj.Author : null;
+		this.Isbn = (obj.Isbn !== "") ? obj.Isbn : null;
 	}
 }
 

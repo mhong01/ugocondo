@@ -13,7 +13,7 @@ export class AsyncStorageHelper
 		try {
 			const value = await localStorage.getItem('IsUserLoggedIn');
 			if (value !== null) {
-				return (value == 'true') ? true : false;
+				return (value === 'true') ? true : false;
 			}
 			return false;
 		} catch (error) {

@@ -41,13 +41,14 @@ export default class AddHome extends React.Component<any, any, any>{
 			NumOfBathCheck: null,
 			NumOfParkingCheck: null,
 			ParkingTypeCheck: null,
-			redirectToReferrer: !UserControllerInstance._IsSignedIn
+			redirectToReferrer: !UserControllerInstance._IsSignedIn,
+			to: "/login"
 		}
 
 		this.OnAddHouseClick = this.OnAddHouseClick.bind(this)
 	}
 
-	OnAddHouseClick() {
+	async OnAddHouseClick() {
 		console.log(this.state)
 		if(this.state.PropertyName == null) {
 			this.setState({PropertyNameCheck: "Cannot be empty!"});
@@ -125,13 +126,17 @@ export default class AddHome extends React.Component<any, any, any>{
 		newHouse.ParkingType = this.state.ParkingType;
 		newHouse.OwnerID = UserControllerInstance._User.id
 
-		PostControllerInstance.CreatePost(newHouse)
+		let result = await PostControllerInstance.CreatePost(newHouse)
+		if(result != null) {
+			this.setState({to: "/edithome"});
+			this.setState({redirectToReferrer: true})
+		}
 	}
 
 	render() {
 		if (this.state.redirectToReferrer) {
 			console.log("blad")
-			return <Redirect to={"/login"} />;
+			return <Redirect to={this.state.to} />;
 		}
 
 		return (

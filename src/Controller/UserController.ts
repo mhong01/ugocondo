@@ -1,4 +1,3 @@
-import { EmailRegexString, PasswordRegexString } from '../Helpers';
 import { UserModel } from '../Model/User';
 import { AsyncStorageHelper } from '../AsyncStorageHelper';
 import BaseController from './BaseController';
@@ -13,19 +12,12 @@ export class UserController extends BaseController {
 	public _User: UserModel;
 	private _UserPassword: string;
 
-	public IsSignedIn() {
-		get: {
-			//console.log("IsSignedIn: " + this._IsSignedIn);
-			return this._IsSignedIn;
-		}
-	}
-
 	public IsLinkedWithFacebook() {
 		get: {
 			let providerData = this._AuthRef.currentUser.providerData;
 			for (let i = 0; i < providerData.length; i++) {
 				////console.log(providerData);
-				if (providerData[i].providerId == "facebook.com") return true;
+				if (providerData[i].providerId === "facebook.com") return true;
 			}
 
 			return false;

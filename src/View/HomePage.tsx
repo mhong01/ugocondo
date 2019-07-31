@@ -1,13 +1,10 @@
 import React from 'react';
-import stylesModule, { drawerWidth } from './styles/StylesModule';
-import { CssBaseline, Typography, Container, createStyles } from '@material-ui/core';
+import{ drawerWidth } from './styles/StylesModule';
 import UGoDrawer from './UGoDrawer';
 import UGoAppBar from './UGoAppBar';
-import { tsConstructorType } from '@babel/types';
-import { render } from 'react-dom';
 import AddHome from './HomeCRUD/AddHome';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
-import { CSSProperties, makeStyles } from '@material-ui/styles';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { CSSProperties } from '@material-ui/styles';
 import FavoritePage from './FavoritePage';
 import ListItem from './ListItem';
 import EditHome from './HomeCRUD/EditHome';
@@ -30,12 +27,6 @@ export default class HomePage extends React.Component<any> {
 	}
 
 	render() {
-		let view = null;
-		switch ((this.state as any).CurrentView) {
-			case HomeViewsEnum.AddHome:
-				view = <AddHome></AddHome>
-				break;
-		}
 
 		const styles_ = {
 			toolbar: {
@@ -53,6 +44,7 @@ export default class HomePage extends React.Component<any> {
 						<Switch>
 							<Route exact path='/' component={ListItem}></Route>
 							<Route exact path='/postNewHome' component={AddHome}></Route>
+							<Route exact path='/edithome' component={EditHome}></Route>
 							<Route path='/favorite' component={FavoritePage}></Route>
 							<Route path='/my' component={MyPage}></Route>
 							<Route path='/login' component={LoginPage}></Route>
@@ -98,7 +90,7 @@ const styles = {
 	} as CSSProperties
 }
 
-enum HomeViewsEnum {
-	List = "List",
-	AddHome = "AddHome"
-}
+// enum HomeViewsEnum {
+// 	List = "List",
+// 	AddHome = "AddHome"
+// }

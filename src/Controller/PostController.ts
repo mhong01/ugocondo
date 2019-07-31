@@ -1,16 +1,13 @@
 import { PostModel, PostStateEnum } from '../Model/Post';
 import UserControllerInstance from './UserController';
-import firebase, { database } from 'firebase';
+import firebase from 'firebase';
 import BaseController from './BaseController';
-
-// Storage
-
-const S3ApiPath = "https://s3.amazonaws.com/tradeitbuuks3/public/";
 
 export class PostControllerClass extends BaseController {
 
 	// This is for creating post
 	// Do not use except when create a new post
+	_CurrentPostID: string = null;
 	_NewPostImageBase64: string;
 	public set NewPostImageBase64(base64: string) {
 		this._NewPostImageBase64 = base64;
@@ -61,25 +58,15 @@ export class PostControllerClass extends BaseController {
 			newHouse.id = postRef.id;
 
 			await postRef.set(Object.assign({}, newHouse));
-			console.log("done	")
+
+			this._CurrentPostID = newHouse.id;
+			return newHouse.id;
 			
 		} catch (error) {
 
 			console.log(error);
 			return null;
 		}
-
-		// 2. Post id as file name
-		// let fullPath = await this.UploadImage(newHouse.id);
-		// if (fullPath == null) return null;
-
-		// 3. Update the post with the new
-		// if (fullPath != null) {
-		// 	newHouse.Media = fullPath;
-		// 	await this.UpdatePost(newHouse);
-		// }
-
-		return newHouse.id;
 	}
 
 	public async ReadPost(id: string) {
@@ -89,14 +76,14 @@ export class PostControllerClass extends BaseController {
 			////console.log(result);
 			return result.data() as PostModel;
 		} catch (error) {
-			//console.log(error);
+			console.log(error);
 			return null;
 		}
 	}
 
 	public async ReadPostViewModel(id: string) {
 		let post = await this.ReadPost(id);
-		let owner = await UserControllerInstance.ReadUser(post.OwnerID);
+		await UserControllerInstance.ReadUser(post.OwnerID);
 
 		let postViewModelObj = new PostModel();
 		postViewModelObj.Update(post);
@@ -111,7 +98,7 @@ export class PostControllerClass extends BaseController {
 			postToUpdate.Update(post);
 
 			console.log(postToUpdate);
-			let result = await this._Collection
+			await this._Collection
 				.doc(postToUpdate.id)
 				.set(Object.assign({}, postToUpdate));
 		} catch (error) {
@@ -122,7 +109,7 @@ export class PostControllerClass extends BaseController {
 	public async DeletePost(id: string) {
 		console.log("In UpdatePost");
 		try {
-			let result = await this._Collection
+			await this._Collection
 				.doc(id)
 				.delete();
 		} catch (error) {
@@ -254,38 +241,6 @@ export class PostControllerClass extends BaseController {
 		} catch (error) {
 			//console.log(error);
 			return null;
-		}
-	}
-
-	public async SearchPost(searchText: string) {
-		try {
-
-			return null;
-		} catch (error) {
-			//console.log(error);
-			return null;
-		}
-	}
-
-	public async MarkSold(id: string) {
-		////console.log("In MarkSold");
-		try {
-			await this._Collection.doc(id).update({
-				State: PostStateEnum.Rented
-			});
-		} catch (e) {
-			//console.log(e);
-		}
-	}
-
-	public async MarkSelling(id: string) {
-		////console.log("In MarkSold");
-		try {
-			await this._Collection.doc(id).update({
-				State: PostStateEnum.Available
-			});
-		} catch (e) {
-			//console.log(e);
 		}
 	}
 

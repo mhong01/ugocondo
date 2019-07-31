@@ -10,7 +10,7 @@ export default class EditHome extends React.Component<any, any, any>{
 		super(props);
 
 		this.state = {
-			id: this.props.HomeID,
+			id: PostControllerInstance._CurrentPostID,
 			PropertyName: null,
 			Unit: null,
 			Address: null,
@@ -60,6 +60,8 @@ export default class EditHome extends React.Component<any, any, any>{
 		this.setState({NumOfBath: house.NumOfBath})
 		this.setState({NumOfParking: house.NumOfParking})
 		this.setState({ParkingType: house.ParkingType})
+
+		console.log(house);
 
 		this.setState({hasData: true})
 	}

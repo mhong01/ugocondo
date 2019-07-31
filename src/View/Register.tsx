@@ -1,14 +1,11 @@
 import React from "react";
 import {
-	Container, CssBaseline, Avatar, Typography,
-	Grid, TextField, FormControlLabel,
-	Checkbox, Button, Link, Box
+	Container,
+	Grid, TextField, Button, Link, Typography
 } from "@material-ui/core";
 
 import { Link as RouterLink } from 'react-router-dom';
-import { CSSProperties } from "@material-ui/styles";
-import UserControllerInstance, { UserController, SignUpEnum } from "../Controller/UserController";
-import { string } from "prop-types";
+import UserControllerInstance from "../Controller/UserController";
 import { UserModel } from "../Model/User";
 
 class RegisterPage extends React.Component<any, any>{
@@ -41,13 +38,13 @@ class RegisterPage extends React.Component<any, any>{
 
 	async onSignUpUserClicked() {
 		let emptyMsg: string = "";
-		if ((this.state.fullName == null || this.state.fullName.trim() == "")
-			|| (this.state.email == null || this.state.email.trim() == "")
-			|| (this.state.password == null || this.state.password.trim() == "")) {
+		if ((this.state.fullName == null || this.state.fullName.trim() === "")
+			|| (this.state.email == null || this.state.email.trim() === "")
+			|| (this.state.password == null || this.state.password.trim() === "")) {
 			emptyMsg = "Invalid input!";
 		}
 
-		if (emptyMsg.trim() != "") {
+		if (emptyMsg.trim() !== "") {
 			this.setState({
 				emptyMsg: emptyMsg,
 			})
@@ -152,18 +149,18 @@ class RegisterPage extends React.Component<any, any>{
 
 export default RegisterPage;
 
-const styles = {
-	Container: {
-		height: "100%",
-		width: "100%",
-		display: 'flex',
-		// overflowY: 'hidden'
-		// flexDirection: 'column'
-	} as CSSProperties,
-	Margin: {
-		margin: 10
-	} as CSSProperties,
-	margin: {
-		margin: 10,
-	}
-}
+// const styles = {
+// 	Container: {
+// 		height: "100%",
+// 		width: "100%",
+// 		display: 'flex',
+// 		// overflowY: 'hidden'
+// 		// flexDirection: 'column'
+// 	} as CSSProperties,
+// 	Margin: {
+// 		margin: 10
+// 	} as CSSProperties,
+// 	margin: {
+// 		margin: 10,
+// 	}
+// }

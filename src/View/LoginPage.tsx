@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-	Container, Button, CssBaseline
-	, Typography, TextField, FormControlLabel,
-	Checkbox, Grid, Link, Box
+	Container, Button, Typography, TextField, FormControlLabel,
+	Checkbox, Grid, Link
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
-import UserControllerInstance, { UserController } from '../Controller/UserController';
-import { UserModel } from '../Model/User';
+import UserControllerInstance from '../Controller/UserController';
 
 class LoginPage extends React.Component<any, any, any>
 {
@@ -31,12 +29,12 @@ class LoginPage extends React.Component<any, any, any>
 
 	async OnSignIn() {
 		let emptyMsg: string = "";
-		if ((this.state.email == null || this.state.email.trim() == "")
-			|| (this.state.password == null || this.state.password.trim() == "")) {
+		if ((this.state.email == null || this.state.email.trim() === "")
+			|| (this.state.password == null || this.state.password.trim() === "")) {
 			emptyMsg = "Invalid input!";
 		}
 
-		if (emptyMsg.trim() != "") {
+		if (emptyMsg.trim() !== "") {
 			this.setState({
 				emptyMsg: emptyMsg,
 			})
