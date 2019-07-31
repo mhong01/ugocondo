@@ -64,7 +64,7 @@ export class UserController extends BaseController {
 			user.id = userRef.id;
 
 			await userRef.set(Object.assign({}, user));
-			
+
 			//console.log(result);
 			//console.log("Create User Success")
 
@@ -176,37 +176,17 @@ export class UserController extends BaseController {
 	public async SignInUser(email: string, password: string) {
 		//console.log('In SignInUser');
 		try {
-			email = email.trim().toLowerCase();
-			await this._AuthRef.signOut(); // Signed out unauthenticated user
-			let signInResult = await firebase.auth().signInWithEmailAndPassword(email, password);
+			let result = await this._Collection.where("Email", "==", email).get();
+			let data = result.docs[0].data() as UserModel;
 
-			this._User = await this.ReadUser(signInResult.user.uid);
-			this._IsSignedIn = true;
+			this._User = data;
+			console.log("result" + result);
+			console.log("----" + data);
+			return data;
 
-			AsyncStorageHelper.SetIsUserLoggedIn(true);
-			//AsyncStorageHelper.SetUserEmail(email);
-			//AsyncStorageHelper.SetUserPassword(password);
-
-			////console.log(signInResult);
-			////console.log("Signed In Success");
-			////console.log(this._IsSignedIn);
-
-			return SignInEnum.Success;
 		} catch (error) {
-			AsyncStorageHelper.SetIsUserLoggedIn(false);
-			this._IsSignedIn = false;
-			//console.log("error: " + error);
-			//console.log("error.code: " + error.code);
-			if (error.code != null) {
-				switch (error.code) {
-					case 'auth/wrong-password':
-					case 'auth/user-not-found':
-						return SignInEnum.NotAuthorizedException;
-					default:
-						return SignInEnum.UnKnownError;
-				}
-			}
-			return SignInEnum.UnKnownError;
+			
+			return null;
 		}
 	}
 
