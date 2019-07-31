@@ -4,11 +4,7 @@ import { Input } from 'semantic-ui-react'
 import PostControllerInstance from '../../Controller/PostController';
 import { PostModel } from '../../Model/Post';
 import {
-	BrowserRouter as Router,
-	Route,
-	Link,
-	Redirect,
-	withRouter
+	Redirect
   } from "react-router-dom";
 import UserControllerInstance from '../../Controller/UserController';
 

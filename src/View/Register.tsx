@@ -8,6 +8,10 @@ import { Link as RouterLink } from 'react-router-dom';
 import UserControllerInstance from "../Controller/UserController";
 import { UserModel } from "../Model/User";
 
+import {
+	Redirect
+  } from "react-router-dom";
+
 class RegisterPage extends React.Component<any, any>{
 	private password: string;
 	private fullName: string;
@@ -24,6 +28,8 @@ class RegisterPage extends React.Component<any, any>{
 			password: null,
 			fullName: null,
 			emptyMsg: null,
+			redirectToReferrer: false,
+			to: "/login"
 		}
 	}
 
@@ -59,6 +65,7 @@ class RegisterPage extends React.Component<any, any>{
 			await UserControllerInstance.CreateUser(user);
 			this.user = user;
 
+			this.setState({redirectToReferrer: true})
 			console.log(this.user);
 			// console.log(status);
 		}
@@ -68,6 +75,8 @@ class RegisterPage extends React.Component<any, any>{
 
 
 	render() {
+		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
+
 		return (
 			<Container component="main" maxWidth="xs">
 				<div>
