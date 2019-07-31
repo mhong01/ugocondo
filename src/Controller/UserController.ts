@@ -25,9 +25,9 @@ export class UserController extends BaseController {
 	public IsLinkedWithFacebook() {
 		get: {
 			let providerData = this._AuthRef.currentUser.providerData;
-			for(let i = 0; i < providerData.length; i++){
+			for (let i = 0; i < providerData.length; i++) {
 				////console.log(providerData);
-				if(providerData[i].providerId == "facebook.com") return true;
+				if (providerData[i].providerId == "facebook.com") return true;
 			}
 
 			return false;
@@ -44,15 +44,7 @@ export class UserController extends BaseController {
 
 	constructor() {
 		super();
-		// this._EmailRegex = new RegExp(EmailRegexString, 'i');
-		// this._PasswordRegex = new RegExp(PasswordRegexString);
-
-		// this._User = new UserModel();
 		this._Collection = this._DatabaseRef.collection(this.DatabaseCollectionName.Users);
-
-		// this.OnAuthStateChanged = this.OnAuthStateChanged.bind(this);
-
-		// this._AuthRef.onAuthStateChanged(this.OnAuthStateChanged);
 	}
 
 	async OnAuthStateChanged(user: firebase.User) {
@@ -68,17 +60,18 @@ export class UserController extends BaseController {
 	public async CreateUser(user: UserModel) {
 		////console.log("In CreateUser");
 		try {
-			let result = await this._DatabaseRef.collection(this.DatabaseCollectionName.Users)
-				.doc(user.id)
-				.set(Object.assign({}, user));
+			let userRef = await this._DatabaseRef.collection(this.DatabaseCollectionName.Users).doc();
+			user.id = userRef.id;
 
+			await userRef.set(Object.assign({}, user));
+			
 			//console.log(result);
 			//console.log("Create User Success")
-			
+
 			return this._User.id;
 		} catch (error) {
-			//console.log("Error confirm");
-			//console.log(error);
+			console.log("Error confirm");
+			console.log(error);
 			return null;
 		}
 	}
@@ -113,7 +106,7 @@ export class UserController extends BaseController {
 
 	//Post: update Email if success
 	// public async SignUpUser(email: string, password: string) {
-	public async SignUpUser(_user: UserModel){
+	public async SignUpUser(_user: UserModel) {
 		console.log("In SignUpUser");
 		let email = _user.Email;
 		email = email.trim();
@@ -259,8 +252,8 @@ export class UserController extends BaseController {
 					this._User.Email = facebookProfileData.user.email;
 					this._User.id = facebookProfileData.user.uid;
 					// this._User.ProfileImage = facebookProfileData.user.providerData[0].photoURL;
-					this._User.Fullname = (facebookProfileData.additionalUserInfo.profile as any).first_name + 
-											(facebookProfileData.additionalUserInfo.profile as any).last_name;
+					this._User.Fullname = (facebookProfileData.additionalUserInfo.profile as any).first_name +
+						(facebookProfileData.additionalUserInfo.profile as any).last_name;
 
 					await this.CreateUser(this._User);
 
@@ -281,8 +274,8 @@ export class UserController extends BaseController {
 				this._AuthRef.currentUser.delete();
 			}
 
-			if(e.code == "auth/account-exists-with-different-credential"){
-				if(facebookProfileData == null) return SignInEnum.AccountExistInAnotherAuthProvider;
+			if (e.code == "auth/account-exists-with-different-credential") {
+				if (facebookProfileData == null) return SignInEnum.AccountExistInAnotherAuthProvider;
 			}
 
 			return SignInEnum.NotAuthorizedException;
@@ -314,7 +307,7 @@ export class UserController extends BaseController {
 			//console.log(e.credential);
 			return false;
 		}
-			
+
 	}
 
 	private async GetFacebookPermission() {
@@ -404,13 +397,13 @@ export class UserController extends BaseController {
 	private GetUserTempProfileImage(value: string) {
 		return "https://api.adorable.io/avatars/100/" + value + ".png";
 	}
-	
+
 	public AddFavoritePost(postID: string) {
 		try {
 			this._Collection.doc(this._User.id).update({
 				SavedPosts: firebase.firestore.FieldValue.arrayUnion(postID)
 			})
-		} catch(e) {
+		} catch (e) {
 			//console.log(e);
 		}
 	}
@@ -420,7 +413,7 @@ export class UserController extends BaseController {
 			this._Collection.doc(this._User.id).update({
 				SavedPosts: firebase.firestore.FieldValue.arrayRemove(postID)
 			})
-		} catch(e) {
+		} catch (e) {
 			//console.log(e);
 		}
 	}
