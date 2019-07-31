@@ -7,12 +7,10 @@ import { ConfigurationConstants } from '../configure';
 
 export class UserController extends BaseController {
 	private _AuthRef = firebase.auth();
-	private _FacebookProviderRef = new firebase.auth.FacebookAuthProvider();
 	private _EmailRegex: RegExp;
-	private _PasswordRegex: RegExp;
-	private _IsSignedIn: boolean = false;
+	public _IsSignedIn: boolean = false;
 
-	private _User: UserModel;
+	public _User: UserModel;
 	private _UserPassword: string;
 
 	public IsSignedIn() {
@@ -180,6 +178,7 @@ export class UserController extends BaseController {
 			let data = result.docs[0].data() as UserModel;
 
 			this._User = data;
+			this._IsSignedIn = true;
 			console.log("result" + result);
 			console.log("----" + data);
 			return data;

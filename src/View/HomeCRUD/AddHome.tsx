@@ -3,6 +3,14 @@ import { CssBaseline, Typography, Container, TextField, Grid, Button } from '@ma
 import { Input } from 'semantic-ui-react'
 import PostControllerInstance from '../../Controller/PostController';
 import { PostModel } from '../../Model/Post';
+import {
+	BrowserRouter as Router,
+	Route,
+	Link,
+	Redirect,
+	withRouter
+  } from "react-router-dom";
+import UserControllerInstance from '../../Controller/UserController';
 
 export default class AddHome extends React.Component<any, any, any>{
 	constructor(props) {
@@ -32,7 +40,8 @@ export default class AddHome extends React.Component<any, any, any>{
 			NumOfBedCheck: null,
 			NumOfBathCheck: null,
 			NumOfParkingCheck: null,
-			ParkingTypeCheck: null
+			ParkingTypeCheck: null,
+			redirectToReferrer: !UserControllerInstance._IsSignedIn
 		}
 
 		this.OnAddHouseClick = this.OnAddHouseClick.bind(this)
@@ -114,11 +123,17 @@ export default class AddHome extends React.Component<any, any, any>{
 		newHouse.NumOfBath = this.state.NumOfBath;
 		newHouse.NumOfParking = this.state.NumOfParking;
 		newHouse.ParkingType = this.state.ParkingType;
+		newHouse.OwnerID = UserControllerInstance._User.id
 
 		PostControllerInstance.CreatePost(newHouse)
 	}
 
 	render() {
+		if (this.state.redirectToReferrer) {
+			console.log("blad")
+			return <Redirect to={"/login"} />;
+		}
+
 		return (
 			<div style={Styles.Container}>
 				<TextField
