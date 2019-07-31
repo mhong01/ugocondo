@@ -44,15 +44,15 @@ export class UserController extends BaseController {
 
 	constructor() {
 		super();
-		this._EmailRegex = new RegExp(EmailRegexString, 'i');
-		this._PasswordRegex = new RegExp(PasswordRegexString);
+		// this._EmailRegex = new RegExp(EmailRegexString, 'i');
+		// this._PasswordRegex = new RegExp(PasswordRegexString);
 
-		this._User = new UserModel();
+		// this._User = new UserModel();
 		this._Collection = this._DatabaseRef.collection(this.DatabaseCollectionName.Users);
 
-		this.OnAuthStateChanged = this.OnAuthStateChanged.bind(this);
+		// this.OnAuthStateChanged = this.OnAuthStateChanged.bind(this);
 
-		this._AuthRef.onAuthStateChanged(this.OnAuthStateChanged);
+		// this._AuthRef.onAuthStateChanged(this.OnAuthStateChanged);
 	}
 
 	async OnAuthStateChanged(user: firebase.User) {
@@ -112,26 +112,35 @@ export class UserController extends BaseController {
 	}
 
 	//Post: update Email if success
-	public async SignUpUser(email: string, password: string) {
-
-		//console.log("In SignUpUser");
+	// public async SignUpUser(email: string, password: string) {
+	public async SignUpUser(_user: UserModel){
+		console.log("In SignUpUser");
+		let email = _user.Email;
 		email = email.trim();
+		let password = _user.Password;
 
 		// Add User to Cognito Pool
 		try {
-			let signUpResult = await firebase.auth().createUserWithEmailAndPassword(email, password);
+			// let signUpResult = await firebase.auth().createUserWithEmailAndPassword(email, password);
+			let user = this._DatabaseRef.collection(this.DatabaseCollectionName.Users).doc();
 
-			var user = firebase.auth().currentUser;
-			await user.sendEmailVerification();
+			// var user = firebase.auth().currentUser;
+			// await user.sendEmailVerification();
 
 			////console.log(signUpResult);
 			this._User = new UserModel();
 			this._User.Email = email;
-			this._UserPassword = password;
-			this._User.id = signUpResult.user.uid;
-			this._User.ProfileImage = this.GetUserTempProfileImage(this._User.id);
+			this._User.Password = password;
+			this._User.Fullname = _user.Fullname;
+			this._User.id = user.id;
+			console.log(this._User);
+			// this._User.ProfileImage = this.GetUserTempProfileImage(this._User.id);
 
-			await this.CreateUserInDB();
+			// this.CreateUserInDB();
+			// let postRef = await this._DatabaseRef.collection(this.DatabaseCollectionName.Users).doc();
+			// this._User.id = postRef.id;
+
+			await user.set(Object.assign({}, this._User));
 			return SignUpEnum.Success;
 
 		} catch (error) {
@@ -155,13 +164,13 @@ export class UserController extends BaseController {
 
 	// Only call once after confirmation to get new userid
 	public async CreateUserInDB() {
-		////console.log("In CreateUserInDB");
+		console.log("In CreateUserInDB");
 		try {
 			let result = await this._DatabaseRef.collection(this.DatabaseCollectionName.Users)
 				.doc(this._User.id)
 				.set(Object.assign({}, this._User));
 
-			//console.log(result);
+			console.log(result);
 			//console.log("Create User Success")
 			return this._User.id;
 		} catch (error) {
@@ -249,7 +258,7 @@ export class UserController extends BaseController {
 					this._User = new UserModel();
 					this._User.Email = facebookProfileData.user.email;
 					this._User.id = facebookProfileData.user.uid;
-					this._User.ProfileImage = facebookProfileData.user.providerData[0].photoURL;
+					// this._User.ProfileImage = facebookProfileData.user.providerData[0].photoURL;
 					this._User.Fullname = (facebookProfileData.additionalUserInfo.profile as any).first_name + 
 											(facebookProfileData.additionalUserInfo.profile as any).last_name;
 
