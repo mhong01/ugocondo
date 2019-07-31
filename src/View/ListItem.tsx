@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Card, CardContent, Typography } from "@material-ui/core";
 import { spacing } from "@material-ui/system";
 import PostControllerInstance from "../Controller/PostController";
 import { PostModel } from "../Model/Post";
 import PostItem from "./PostItem";
+import { threadId } from "worker_threads";
 
 export default class ListItem extends React.Component<any, any, any>{
 
@@ -11,7 +12,6 @@ export default class ListItem extends React.Component<any, any, any>{
 
     constructor(props){
         super(props);
-        // this.initFakeHome();
         this.latestPosts = new Array();
         this.state = {
             latestPost : Array,
@@ -20,13 +20,12 @@ export default class ListItem extends React.Component<any, any, any>{
     }
 
     async componentWillMount(){
-        // let latestPosts = await this.getAllLatestPost();
-        let latestPosts =  await PostControllerInstance.GetPostsByUserID("testuser");
-        console.log(latestPosts);
+        let latestPosts = await this.getAllLatestPost();
         this.setState({
             latestPost: latestPosts,
         })
         console.log(this.state.latestPost);
+        this.latestPosts = this.state.latestPost;
     }
 
     initFakeHome(){
@@ -52,7 +51,6 @@ export default class ListItem extends React.Component<any, any, any>{
 
     async getAllLatestPost(){
         return await PostControllerInstance.GetLatestPosts();
-        // return await PostControllerInstance.GetPostsByUserID("testuser");
     }
 
     render(){
@@ -69,9 +67,26 @@ export default class ListItem extends React.Component<any, any, any>{
         return(
             <div style={styles._root}>
                 <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                        <PostItem Post={this.latestPosts[0]}/>
-                    </Grid>
+                    {this.latestPosts.map(tile => (
+						<Card>
+							<CardContent>
+								<Typography color="textSecondary" gutterBottom>
+									{tile.PropertyName}
+								</Typography>
+								<Typography variant="h5" component="h2">
+
+								</Typography>
+								<Typography color="textSecondary">
+									adjective
+								</Typography>
+								<Typography variant="body2" component="p">
+									well meaning and kindly.
+									<br />
+									{'"a benevolent smile"'}
+								</Typography>
+							</CardContent>
+						</Card>
+					))}
                 </Grid>
             </div>
         );

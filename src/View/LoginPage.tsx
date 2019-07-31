@@ -3,12 +3,23 @@ import { Container, Button, CssBaseline
 	, Typography, TextField, FormControlLabel,
 	 Checkbox, Grid, Link, Box } from '@material-ui/core';
 import {Link as RouterLink} from 'react-router-dom';
+import { UserController } from '../Controller/UserController';
 
 class LoginPage extends React.Component<any>
 {
+  private userController : UserController;
+  private password:string;
+  private userName:string;
 	constructor(props) {
-		super(props);
-	}
+    super(props);
+    this.userController = new UserController();
+  }
+  
+  componentWillMount(){
+  }
+
+  componentDidMount(){
+  }
 
 	render() {
 		return (
