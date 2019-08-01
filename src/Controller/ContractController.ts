@@ -139,6 +139,19 @@ export class ContractControllerClass extends BaseController {
 		}
 	}
 
+	public async GetContractByRenterID(id: string) {
+		console.log("In GetContractByUserID: " + id);
+		try {
+			let result = await this._Collection.where("RenterID", "==", id).get();
+			let data = this.ConvertToPostViewModel(result);
+
+			return data;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	}
+
 	public async GetPostsByPostID(id: string) {
 		console.log("In GetPostsByPostID: " + id);
 		try {
