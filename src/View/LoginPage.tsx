@@ -52,7 +52,7 @@ class LoginPage extends React.Component<any, any, any>
 
 	render() {
 		let content = null;
-		if(this.state.isLoggedIn) {
+		if(this.state.isLoggedIn || UserControllerInstance._IsSignedIn) {
 			content = <h1>Your are logged in!</h1>
 			console.log(this.state);
 		} else {

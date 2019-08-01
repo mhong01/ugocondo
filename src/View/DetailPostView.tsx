@@ -18,6 +18,7 @@ class DetailPostView extends React.Component<any, any, any> {
             post: PostModel,
             currentUserId: null,
             postOwnerId: null,
+            avaiContract: null,
             redirectToReferrer: !UserControllerInstance._IsSignedIn,
 			to: "/login"
         }
@@ -52,6 +53,19 @@ class DetailPostView extends React.Component<any, any, any> {
     }
 
 
+    async onCancelClicked(){
+        console.log("Delete")
+        if (this.state.avaiContract == null && this.state.avaiContract == undefined){
+            return;
+        }
+        let contract = this.state.avaiContract;
+        let obj = await ContractControllerInstance.DeleteContract(contract.id);
+        // if (obj != null){
+            this.setState({ to: "/" });
+			this.setState({ redirectToReferrer: true })
+        // }
+        this.forceUpdate();
+    }
 
     async onBookingClicked(){
         console.log("clicked");
@@ -63,13 +77,33 @@ class DetailPostView extends React.Component<any, any, any> {
 
         let contractUpdated = await ContractControllerInstance.CreateContract(contract);
         console.log(contractUpdated);
+
+
     }
 
-    enableBookingBtn(){
+    async enableBookingBtn(){
         console.log(this.state.postOwnerId)
         console.log(this.state.currentUserId)
-        // if (this.state.postOwnerId != undefined 
-        //     && this.state.currentUserId != undefined){
+        console.log(UserControllerInstance.UserID)
+        // let rentedItems = await ContractControllerInstance.GetContractByRenterID(UserControllerInstance.UserID);
+        // if (rentedItems != null){
+
+        //     for (let i : 0; i < rentedItems.length; i++){
+        //         if (this.post.id == rentedItems[i].RenterID){
+        //             this.setState({
+        //                 avaiContract: rentedItems[i],
+        //             });
+        //             return (<div>
+        //                 <Typography variant="body1" color="textSecondary" component="p">
+        //                 {"You have already booked this place!"}
+        //             </Typography>
+        //                 <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
+        //             Cancel
+        //             </Button></div>);
+        //         }
+        //     }
+        // }
+
         if( this.state.postOwnerId != this.state.currentUserId){
             return ( <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
                     Book
