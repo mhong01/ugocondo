@@ -34,7 +34,10 @@ export default class EditHome extends React.Component<any, any, any>{
 			NumOfBedCheck: null,
 			NumOfBathCheck: null,
 			NumOfParkingCheck: null,
-			ParkingTypeCheck: null
+			ParkingTypeCheck: null,
+			Price: null,
+			Description: null,
+			ImageURL: null,
 		}
 
 		this.OnSaveHouseClick = this.OnSaveHouseClick.bind(this)
@@ -47,23 +50,26 @@ export default class EditHome extends React.Component<any, any, any>{
 
 	async GetHome() {
 		let house = await PostControllerInstance.ReadPost(this.state.id);
-		this.setState({id: house.id})
-		this.setState({PropertyName: house.PropertyName})
-		this.setState({Unit: house.Unit})
-		this.setState({Address: house.Address})
-		this.setState({City: house.City})
-		this.setState({ProvinceState: house.ProvinceState})
-		this.setState({Country: house.Country})
-		this.setState({Zip: house.Zip})
-		this.setState({Area: house.Area})
-		this.setState({NumOfBed: house.NumOfBed})
-		this.setState({NumOfBath: house.NumOfBath})
-		this.setState({NumOfParking: house.NumOfParking})
-		this.setState({ParkingType: house.ParkingType})
+		this.setState({ id: house.id })
+		this.setState({ PropertyName: house.PropertyName })
+		this.setState({ Unit: house.Unit })
+		this.setState({ Address: house.Address })
+		this.setState({ City: house.City })
+		this.setState({ ProvinceState: house.ProvinceState })
+		this.setState({ Country: house.Country })
+		this.setState({ Zip: house.Zip })
+		this.setState({ Area: house.Area })
+		this.setState({ NumOfBed: house.NumOfBed })
+		this.setState({ NumOfBath: house.NumOfBath })
+		this.setState({ NumOfParking: house.NumOfParking })
+		this.setState({ ParkingType: house.ParkingType })
+		this.setState({ Price: house.Price })
+		this.setState({ Description: house.Description })
+		this.setState({ ImageURL: house.ImageURL })
 
 		console.log(house);
 
-		this.setState({hasData: true})
+		this.setState({ hasData: true })
 	}
 
 	OnSaveHouseClick() {
@@ -71,61 +77,106 @@ export default class EditHome extends React.Component<any, any, any>{
 		if (this.state.PropertyName == null) {
 			this.setState({ PropertyNameCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ PropertyNameCheck: null });
 		}
 
 		if (this.state.Unit == null) {
 			this.setState({ UnitCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ UnitCheck: null });
 		}
 
 		if (this.state.Address == null) {
 			this.setState({ AddressCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ AddressCheck: null });
 		}
 
 		if (this.state.City == null) {
 			this.setState({ CityCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ CityCheck: null });
 		}
 
 		if (this.state.ProvinceState == null) {
 			this.setState({ ProvinceStateCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ ProvinceStateCheck: null });
 		}
 
 		if (this.state.Country == null) {
 			this.setState({ CountryCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ CountryCheck: null });
 		}
 
 		if (this.state.Zip == null) {
 			this.setState({ ZipCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ ZipCheck: null });
 		}
 
 		if (this.state.Area == null) {
 			this.setState({ AreaCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ AreaCheck: null });
 		}
 
 		if (this.state.NumOfBed == null) {
 			this.setState({ NumOfBedCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ NumOfBedCheck: null });
 		}
 
 		if (this.state.NumOfBath == null) {
 			this.setState({ NumOfBathCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ NumOfBathCheck: null });
 		}
 
 		if (this.state.NumOfParking == null) {
 			this.setState({ NumOfParkingCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ NumOfParkingCheck: null });
 		}
 
 		if (this.state.ParkingType == null) {
 			this.setState({ ParkingTypeCheck: "Cannot be empty!" });
 			return;
+		} else {
+			this.setState({ ParkingTypeCheck: null });
+		}
+
+		if (this.state.Price == null) {
+			this.setState({ PriceCheck: "Cannot be empty!" });
+			return;
+		} else {
+			this.setState({ PriceCheck: null });
+		}
+
+		if (this.state.Description == null) {
+			this.setState({ DescriptionCheck: "Cannot be empty!" });
+			return;
+		} else {
+			this.setState({ DescriptionCheck: null });
+		}
+
+		if (this.state.ImageURL == null) {
+			this.setState({ ImageURLCheck: "Cannot be empty!" });
+			return;
+		} else {
+			this.setState({ ImageURLCheck: null });
 		}
 
 
@@ -143,6 +194,9 @@ export default class EditHome extends React.Component<any, any, any>{
 		newHouse.NumOfBath = this.state.NumOfBath;
 		newHouse.NumOfParking = this.state.NumOfParking;
 		newHouse.ParkingType = this.state.ParkingType;
+		newHouse.Price = this.state.Price;
+		newHouse.Description = this.state.Description;
+		newHouse.ImageURL = this.state.ImageURL;
 
 		PostControllerInstance.UpdatePost(newHouse)
 	}
@@ -163,6 +217,37 @@ export default class EditHome extends React.Component<any, any, any>{
 					onChange={(e) => this.setState({ PropertyName: e.currentTarget.value })}
 					helperText={this.state.PropertyNameCheck}
 				/>
+				<TextField
+					id="standard-name"
+					label="Price"
+					margin="normal"
+					style={Styles.SingleInput}
+					value={this.state.Price}
+					onChange={(e) => this.setState({ Price: e.currentTarget.value })}
+					helperText={this.state.PriceCheck}
+				/>
+				<div style={Styles.HorizontalInputContainer}>
+					<TextField
+						id="standard-name"
+						label="Description"
+						margin="normal"
+						type="text"
+						value={this.state.Description}
+						style={{ ...Styles.DoubleInput, ...Styles.LeftInput }}
+						onChange={(e) => this.setState({ Description: e.currentTarget.value })}
+						helperText={this.state.DescriptionCheck}
+					/>
+					<TextField
+						id="standard-name"
+						label="Image Link"
+						margin="normal"
+						type="text"
+						value={this.state.ImageURL}
+						style={{ ...Styles.DoubleInput, ...Styles.RightInput }}
+						onChange={(e) => this.setState({ ImageURL: e.currentTarget.value })}
+						helperText={this.state.ImageURLCheck}
+					/>
+				</div>
 				<div style={Styles.HorizontalInputContainer}>
 					<TextField
 						id="standard-name"
@@ -277,7 +362,7 @@ export default class EditHome extends React.Component<any, any, any>{
 					/>
 				</div>
 
-				<div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%"}}>
+				<div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
 					<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
 						Edit House
 					</Button>
