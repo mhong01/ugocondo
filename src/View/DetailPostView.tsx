@@ -4,13 +4,14 @@ import PostControllerInstance from "../Controller/PostController";
 import { PostModel } from "../Model/Post";
 import UserControllerInstance from "../Controller/UserController";
 import {Redirect} from "react-router-dom";
+import { ContractModel, ContactStatusEnum } from "../Model/Contract";
+import ContractControllerInstance, { ContractControllerClass } from "../Controller/ContractController";
 
 class DetailPostView extends React.Component<any, any, any> {
 
     private postKey: string;
     private post : PostModel = null;
     private posts: Array<any> = new Array() ;
-
     constructor(props){
         super(props);
         this.state = {
@@ -36,11 +37,11 @@ class DetailPostView extends React.Component<any, any, any> {
             this.setState({
                 currentUserId: UserControllerInstance.UserID
             });
+            this.setState({
+                postOwnerId: post.OwnerID
+            });
         }
         
-        this.setState({
-            postOwnerId: post.OwnerID
-        });
         this.post = this.state.post;
         console.log(this.post);
     }
@@ -50,8 +51,18 @@ class DetailPostView extends React.Component<any, any, any> {
        
     }
 
-    onBookingClicked(){
+
+
+    async onBookingClicked(){
         console.log("clicked");
+        let contract = new ContractModel();
+        contract.OnwerID = this.state.postOwnerId;
+        contract.RenterID = this.state.currentUserId;
+        contract.PostID = this.post.id;
+        contract.Status = ContactStatusEnum.Pending;
+
+        let contractUpdated = await ContractControllerInstance.CreateContract(contract);
+        console.log(contractUpdated);
     }
 
     enableBookingBtn(){
@@ -85,7 +96,7 @@ class DetailPostView extends React.Component<any, any, any> {
                 color: 'black',
             },
             media: {
-            height: 140,
+            height: 250,
             },
         };
         if(this.state.post == null) return null;

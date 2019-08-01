@@ -40,10 +40,13 @@ class PostItem extends React.Component<any, any, any>{
 
 	render() {
 		var styles = {
-			media: {
-				height: 140,
-			},
-		};
+            media: {
+                height: 300,
+            },
+            cardActionAre: {
+                width: 500
+            }
+        };
 
 		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
 
@@ -57,30 +60,30 @@ class PostItem extends React.Component<any, any, any>{
 		}
 
 		return (
-			<Card>
-				<CardActionArea>
-					<CardMedia
-						style={styles.media}
-						image={this.post.ImageURL}
-						title={this.post.PropertyName}
-					/>
-					<CardContent>
-						<Typography gutterBottom variant="h5" component="h2">
-							{this.post.PropertyName}
-						</Typography>
-						<Typography variant="body1" color="textSecondary" component="p">
-							{this.post.Price}
-						</Typography>
-						<Typography variant="body2" color="textSecondary" component="p">
-							{this.post.Description}
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-				<CardActions>
-					<Button component={RouterLink}
-						{...{ to: '/view/' + this.post.id } as any}
-						size="small" color="primary">
-						View
+            <Card style={styles.cardActionAre}>
+                <CardActionArea>
+                <CardMedia
+                    style={styles.media}
+                    image={this.post.ImageURL}
+                    title={this.post.PropertyName}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                    {this.post.PropertyName}
+                    </Typography>
+                    <Typography variant="body1" color="textSecondary" component="p">
+                    {this.post.Price}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                    {this.post.Description}
+                    </Typography>
+                </CardContent>
+                </CardActionArea>
+                <CardActions>
+                <Button component={RouterLink}
+                        {...{ to: '/view/' + this.post.id } as any}
+                        size="small" color="primary">
+                    View
                 </Button>
 				{editButton}
 				</CardActions>

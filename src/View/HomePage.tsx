@@ -5,7 +5,7 @@ import UGoAppBar from './UGoAppBar';
 import AddHome from './HomeCRUD/AddHome';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { CSSProperties } from '@material-ui/styles';
-import RequestPage from './FavoritePage';
+import RequestPage from './ContractPage';
 import ListItem from './ListItem';
 import EditHome from './HomeCRUD/EditHome';
 import MyPage from './MyPage';
