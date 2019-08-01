@@ -10,9 +10,24 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import HowToReg from '@material-ui/icons/HowToReg';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom'
+import UserControllerInstance from '../Controller/UserController';
+import {
+	Redirect
+  } from "react-router-dom";
 
-class UGoDrawer extends Component {
+class UGoDrawer extends Component<any, any, any> {
 	static propTypes: {};
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			redirectToReferrer: false,
+			to: "/login"
+		}
+
+		this.logout = this.logout.bind(this);
+	}
 
 	navigateHome() {
 		return (<ListItem />);
@@ -22,7 +37,19 @@ class UGoDrawer extends Component {
 
 	}
 
+	logout() {
+		UserControllerInstance._IsSignedIn =  false;
+
+		this.setState({redirectToReferrer: true})
+	}
+
 	render() {
+		let redirect = null;
+		if (this.state.redirectToReferrer) {
+			console.log("blad")
+			redirect = <Redirect to={this.state.to} />;
+		}
+
 		const ClippedDrawer = withStyles({
 			root: {
 				top: 0,
@@ -52,6 +79,7 @@ class UGoDrawer extends Component {
 		}
 		return (
 			<ClippedDrawer variant="permanent">
+				{redirect}
 				<div style={styles.toolbar} />
 				{/* <BrowserRouter> */}
 				<List>
@@ -92,8 +120,7 @@ class UGoDrawer extends Component {
 						<ListItemIcon><HowToReg /></ListItemIcon>
 						<ListItemText primary="Register" />
 					</ListItem>
-					<ListItem component={Link}
-						{...{ to: '/logout' } as any} button>
+					<ListItem button onClick={this.logout}>
 						<ListItemIcon><ExitToApp /></ListItemIcon>
 						<ListItemText primary="Log-out" />
 					</ListItem>

@@ -4,6 +4,8 @@ export class PostModel extends BaseModel {
 	public OwnerID: string = null;
 	public PropertyName:  string;
 	// public Condition: ConditionEnum = ConditionEnum.Unknown;
+	public Description: string;
+	public Price: string;
 	public Unit: string;
 	public Address: string;
 	public City: string;

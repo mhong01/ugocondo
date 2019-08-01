@@ -1,5 +1,5 @@
 import React from 'react';
-import{ drawerWidth } from './styles/StylesModule';
+import { drawerWidth } from './styles/StylesModule';
 import UGoDrawer from './UGoDrawer';
 import UGoAppBar from './UGoAppBar';
 import AddHome from './HomeCRUD/AddHome';
@@ -86,7 +86,10 @@ const styles = {
 	} as CSSProperties,
 	Main: {
 		flexGrow: 1,
-		marginLeft: drawerWidth
+		marginLeft: drawerWidth,
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center"
 	} as CSSProperties
 }
 

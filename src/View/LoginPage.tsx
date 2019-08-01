@@ -84,10 +84,6 @@ class LoginPage extends React.Component<any, any, any>
 							autoComplete="current-password"
 							onChange={e => this.setState({password: e.currentTarget.value})}
 						/>
-						<FormControlLabel
-							control={<Checkbox value="remember" color="primary" />}
-							label="Remember me"
-						/>
 						<Button
 							fullWidth
 							variant="contained"
@@ -96,19 +92,6 @@ class LoginPage extends React.Component<any, any, any>
 							Sign In
 						</Button>
 						{(this.state.errorMsg != null && <div>{this.state.errorMsg}</div>)}
-						<Grid container>
-							<Grid item xs>
-								<Link href="#" variant="body2">
-									Forgot password?
-								</Link>
-							</Grid>
-							<Grid item>
-								<Link component={RouterLink}
-									{...{ to: '/register' } as any}>
-									{"Don't have an account? Sign Up"}
-								</Link>
-							</Grid>
-						</Grid>
 					</form>
 				</div>
 			)
