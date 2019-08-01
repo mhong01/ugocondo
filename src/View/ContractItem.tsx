@@ -151,10 +151,10 @@ class ContractItem extends React.Component <any, any, any>{
         console.log("Delete")
         let contract = this.post.Contract;
         let obj = await ContractControllerInstance.DeleteContract(contract.id);
-        if (obj != null){
+        // if (obj != null){
             this.setState({ to: "/request" });
 			this.setState({ redirectToReferrer: true })
-        }
+        // }
         this.forceUpdate();
     }
 
