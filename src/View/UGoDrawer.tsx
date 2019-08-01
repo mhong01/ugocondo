@@ -6,6 +6,7 @@ import { drawerWidth } from "./styles/StylesModule";
 import Home from '@material-ui/icons/Home';
 import Favorite from '@material-ui/icons/Favorite';
 import Add from '@material-ui/icons/Add';
+import QueryBuilder from '@material-ui/icons/QueryBuilder';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import HowToReg from '@material-ui/icons/HowToReg';
 import ExitToApp from '@material-ui/icons/ExitToApp';
@@ -81,19 +82,18 @@ class UGoDrawer extends Component<any, any, any> {
 			<ClippedDrawer variant="permanent">
 				{redirect}
 				<div style={styles.toolbar} />
-				{/* <BrowserRouter> */}
 				<List>
 					<ListItem component={Link}
 						{...{ to: '/' } as any}
 						button >
-						<ListItemIcon><Home /></ListItemIcon>
+						<ListItemIcon><Home/></ListItemIcon>
 						<ListItemText primary="Homepage" />
 					</ListItem>
 					<ListItem component={Link}
-						{...{ to: '/favorite' } as any}
+						{...{ to: '/request' } as any}
 						button>
-						<ListItemIcon><Favorite /></ListItemIcon>
-						<ListItemText primary="Favorite List" />
+						<ListItemIcon><QueryBuilder /></ListItemIcon>
+						<ListItemText primary="Booking Request" />
 					</ListItem>
 					<ListItem component={Link}
 						{...{ to: '/my' } as any}

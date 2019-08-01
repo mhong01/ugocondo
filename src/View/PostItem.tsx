@@ -20,16 +20,17 @@ class PostItem extends React.Component <any, any, any>{
         console.log(this.post);
     }
 
-    onViewClicked(){
-
-    }
-
     render(){
+        var styles = {
+            media: {
+                height: 140,
+            },
+        };
         return (
             <Card>
                 <CardActionArea>
                 <CardMedia
-                    // className={classes.media}
+                    style={styles.media}
                     image={this.post.ImageURL}
                     title={this.post.PropertyName}
                 />

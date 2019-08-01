@@ -1,13 +1,25 @@
 import React, { Component } from "react";
+import { PostModel } from "../Model/Post";
+import UserControllerInstance from "../Controller/UserController";
+import {Redirect} from "react-router-dom";
 
-class FavoritePage extends Component{
+class RequestPage extends Component<any, any, any>{
 
     constructor(props){
         super(props);
-        console.log('fjjf');
+        this.state = {
+            post: PostModel,
+            currentUserId: null,
+            postOwnerId: null,
+            redirectToReferrer: !UserControllerInstance._IsSignedIn,
+			to: "/login"
+        }
     }
 
     render(){
+        if (this.state.redirectToReferrer) {
+			return <Redirect to={this.state.to} />;
+		}
         return(
         <div>
             
@@ -19,4 +31,4 @@ class FavoritePage extends Component{
 }
 
 
-export default FavoritePage;
+export default RequestPage;

@@ -55,6 +55,7 @@ export class PostControllerClass extends BaseController {
 		newHouse.ImageURL = data.ImageURL;
 		newHouse.CreatedAt = firebase.firestore.Timestamp.fromDate(new Date());
 		newHouse.UpdatedAt = firebase.firestore.Timestamp.fromDate(new Date());
+		newHouse.OwnerID = data.OwnerID;
 
 		try {
 			let postRef = await this._DatabaseRef.collection(this.DatabaseCollectionName.Posts).doc();

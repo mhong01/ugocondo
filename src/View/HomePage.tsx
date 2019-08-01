@@ -5,7 +5,7 @@ import UGoAppBar from './UGoAppBar';
 import AddHome from './HomeCRUD/AddHome';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { CSSProperties } from '@material-ui/styles';
-import FavoritePage from './FavoritePage';
+import RequestPage from './FavoritePage';
 import ListItem from './ListItem';
 import EditHome from './HomeCRUD/EditHome';
 import MyPage from './MyPage';
@@ -13,13 +13,19 @@ import RegisterPage from './Register';
 import LoginPage from './LoginPage';
 import DetailPostView from './DetailPostView';
 
-export default class HomePage extends React.Component<any> {
+export default class HomePage extends React.Component<any, any> {
+
+	public static isLoggedIn: boolean = false;
+
+	private userEmail: string = "";
+	private isUserLoggedIn: boolean = false;
 
 	constructor(props) {
 		super(props);
-
 		this.state = {
-			CurrentView: "AddHome"
+			CurrentView: "AddHome",
+			isUserLoggedIn: this.isUserLoggedIn,
+			userEmail : this.userEmail,
 		}
 	}
 
@@ -27,8 +33,11 @@ export default class HomePage extends React.Component<any> {
 		this.setState({ CurrentView: "AddHome" })
 	}
 
-	render() {
+	// public setLoggedIn(isLoggedIn: boolean){
+	// 	this.isLoggedIn = isLoggedIn;
+	// }
 
+	render() {
 		const styles_ = {
 			toolbar: {
 				minHeight: 200,
@@ -38,24 +47,24 @@ export default class HomePage extends React.Component<any> {
 
 		return (
 			<div style={styles.Container}>
-				<UGoAppBar />
-				<BrowserRouter>
-					<UGoDrawer />
-					<main style={styles.Main}>
-						<div style={styles_.toolbar} />
-						<Switch>
-							<Route exact path='/' component={ListItem}></Route>
-							<Route path='/postNewHome' component={AddHome}></Route>
-							<Route path='/edithome' component={EditHome}></Route>
-							<Route path='/favorite' component={FavoritePage}></Route>
-							<Route path='/my' component={MyPage}></Route>
-							<Route path='/login' component={LoginPage}></Route>
-							<Route path='/signup' component={RegisterPage}></Route>
-							<Route path='/logout' component={ListItem}></Route>
-							<Route path='/view/:id' component={DetailPostView}></Route>
-						</Switch>
-					</main>
-				</BrowserRouter>
+			<BrowserRouter>
+			<UGoAppBar/>
+				<UGoDrawer />
+					<Switch>
+				<main style={styles.Main}>
+					<div style={styles_.toolbar} />
+						<Route exact path='/' component={ListItem}></Route>
+						<Route path='/postNewHome' component={AddHome}></Route>
+						<Route path='/edithome' component={EditHome}></Route>
+						<Route path='/request' component={RequestPage}></Route>
+						<Route path='/my' component={MyPage}></Route>
+						<Route path='/login' component={LoginPage}></Route>
+						<Route path='/signup' component={RegisterPage}></Route>
+						<Route path='/logout' component={ListItem}></Route>
+						<Route path='/view/:id' component={DetailPostView}></Route>
+				</main>
+					</Switch>
+			</BrowserRouter>
 			</div>
 		);
 	}

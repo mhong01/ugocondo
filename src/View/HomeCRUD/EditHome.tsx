@@ -3,6 +3,7 @@ import { CssBaseline, Typography, Container, TextField, Grid, Button } from '@ma
 import { Input } from 'semantic-ui-react'
 import PostControllerInstance from '../../Controller/PostController';
 import { PostModel } from '../../Model/Post';
+import {Redirect} from "react-router-dom";
 
 export default class EditHome extends React.Component<any, any, any>{
 
@@ -203,6 +204,7 @@ export default class EditHome extends React.Component<any, any, any>{
 
 	OnDeleteHouseClick() {
 		PostControllerInstance.DeletePost(this.state.id)
+		return <Redirect to='/' />
 	}
 
 	render() {
