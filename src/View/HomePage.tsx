@@ -83,7 +83,7 @@ const styles = {
 		width: "100%",
 		display: 'flex',
 		flexDirection: 'row',
-		marginLeft: drawerWidth
+		paddingLeft: drawerWidth
 	} as CSSProperties,
 	FullSize: {
 		height: "100%",

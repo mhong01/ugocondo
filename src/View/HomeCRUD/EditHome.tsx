@@ -44,6 +44,7 @@ export default class EditHome extends React.Component<any, any, any>{
 
 		this.OnSaveHouseClick = this.OnSaveHouseClick.bind(this)
 		this.OnDeleteHouseClick = this.OnDeleteHouseClick.bind(this)
+		this.ClearUpdateInform = this.ClearUpdateInform.bind(this)
 	}
 
 	async componentWillMount() {
@@ -201,11 +202,17 @@ export default class EditHome extends React.Component<any, any, any>{
 		newHouse.ImageURL = this.state.ImageURL;
 
 		PostControllerInstance.UpdatePost(newHouse)
+		this.setState({updateInform: "Updated"})
+		setTimeout(this.ClearUpdateInform, 3000)
 	}
 
 	OnDeleteHouseClick() {
 		PostControllerInstance.DeletePost(this.state.id)
 		return <Redirect to='/' />
+	}
+
+	ClearUpdateInform() {
+		this.setState({updateInform: ""});
 	}
 
 	render() {
@@ -366,7 +373,7 @@ export default class EditHome extends React.Component<any, any, any>{
 				</div>
 
 				<div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
-					<div>
+					<div style={{display: "flex", flexDirection: "column"}}>
 						<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
 							Edit House
 						</Button>
