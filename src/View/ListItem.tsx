@@ -65,6 +65,8 @@ export default class ListItem extends React.Component<any, any, any>{
 				flexGrow: 1,
 				margin: 10,
 				marginTop: 64,
+				height: "100%",
+				width: "100%"
 			} as CSSProperties,
 			paper: {
 				padding: 2,

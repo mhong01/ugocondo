@@ -3,7 +3,7 @@ import { CssBaseline, Typography, Container, TextField, Grid, Button } from '@ma
 import { Input } from 'semantic-ui-react'
 import PostControllerInstance from '../../Controller/PostController';
 import { PostModel } from '../../Model/Post';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export default class EditHome extends React.Component<any, any, any>{
 
@@ -39,6 +39,7 @@ export default class EditHome extends React.Component<any, any, any>{
 			Price: null,
 			Description: null,
 			ImageURL: null,
+			updateInform: ""
 		}
 
 		this.OnSaveHouseClick = this.OnSaveHouseClick.bind(this)
@@ -365,9 +366,12 @@ export default class EditHome extends React.Component<any, any, any>{
 				</div>
 
 				<div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
-					<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
-						Edit House
-					</Button>
+					<div>
+						<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
+							Edit House
+						</Button>
+						{this.state.updateInform}
+					</div>
 					<Button onClick={this.OnDeleteHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
 						Delete House
 					</Button>
