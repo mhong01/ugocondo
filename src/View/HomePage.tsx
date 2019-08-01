@@ -11,6 +11,7 @@ import EditHome from './HomeCRUD/EditHome';
 import MyPage from './MyPage';
 import RegisterPage from './Register';
 import LoginPage from './LoginPage';
+import DetailPostView from './DetailPostView';
 
 export default class HomePage extends React.Component<any> {
 
@@ -43,13 +44,14 @@ export default class HomePage extends React.Component<any> {
 						<div style={styles_.toolbar} />
 						<Switch>
 							<Route exact path='/' component={ListItem}></Route>
-							<Route exact path='/postNewHome' component={AddHome}></Route>
-							<Route exact path='/edithome' component={EditHome}></Route>
+							<Route path='/postNewHome' component={AddHome}></Route>
+							<Route path='/edithome' component={EditHome}></Route>
 							<Route path='/favorite' component={FavoritePage}></Route>
 							<Route path='/my' component={MyPage}></Route>
 							<Route path='/login' component={LoginPage}></Route>
 							<Route path='/signup' component={RegisterPage}></Route>
 							<Route path='/logout' component={ListItem}></Route>
+							<Route path='/view/:id' component={DetailPostView}></Route>
 						</Switch>
 					</main>
 				</BrowserRouter>
