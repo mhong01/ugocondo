@@ -14,11 +14,11 @@ class DetailPostView extends React.Component<any, any, any> {
     private posts: Array<any> = new Array() ;
     constructor(props){
         super(props);
+        this.post = new PostModel();
         this.state = {
-            post: PostModel,
+            post: null,
             currentUserId: null,
             postOwnerId: null,
-            avaiContract: null,
             redirectToReferrer: !UserControllerInstance._IsSignedIn,
 			to: "/login"
         }
@@ -28,18 +28,18 @@ class DetailPostView extends React.Component<any, any, any> {
     async componentWillMount(){
         const {params} = this.props.match;
         console.log("params " + params.id )
-        let post = await this.getPostById(params.id);
-        console.log(post);
+        this.post = await this.getPostById(params.id);
+        // console.log(post);
         
-        this.setState({
-            post: post
-        });
         if (!this.state.redirectToReferrer){
+            this.setState({
+                post: this.post
+            });
             this.setState({
                 currentUserId: UserControllerInstance.UserID
             });
             this.setState({
-                postOwnerId: post.OwnerID
+                postOwnerId: this.post.OwnerID
             });
         }
         
@@ -50,21 +50,6 @@ class DetailPostView extends React.Component<any, any, any> {
     async getPostById(postKey: string){
         return await PostControllerInstance.ReadPost(postKey);
        
-    }
-
-
-    async onCancelClicked(){
-        console.log("Delete")
-        if (this.state.avaiContract == null && this.state.avaiContract == undefined){
-            return;
-        }
-        let contract = this.state.avaiContract;
-        let obj = await ContractControllerInstance.DeleteContract(contract.id);
-        // if (obj != null){
-            this.setState({ to: "/" });
-			this.setState({ redirectToReferrer: true })
-        // }
-        this.forceUpdate();
     }
 
     async onBookingClicked(){
@@ -84,25 +69,6 @@ class DetailPostView extends React.Component<any, any, any> {
     async enableBookingBtn(){
         console.log(this.state.postOwnerId)
         console.log(this.state.currentUserId)
-        console.log(UserControllerInstance.UserID)
-        // let rentedItems = await ContractControllerInstance.GetContractByRenterID(UserControllerInstance.UserID);
-        // if (rentedItems != null){
-
-        //     for (let i : 0; i < rentedItems.length; i++){
-        //         if (this.post.id == rentedItems[i].RenterID){
-        //             this.setState({
-        //                 avaiContract: rentedItems[i],
-        //             });
-        //             return (<div>
-        //                 <Typography variant="body1" color="textSecondary" component="p">
-        //                 {"You have already booked this place!"}
-        //             </Typography>
-        //                 <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
-        //             Cancel
-        //             </Button></div>);
-        //         }
-        //     }
-        // }
 
         if( this.state.postOwnerId != this.state.currentUserId){
             return ( <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
@@ -111,7 +77,6 @@ class DetailPostView extends React.Component<any, any, any> {
         } else {
             return null;
         }
-        // } 
     }
 
     render(){
@@ -175,9 +140,9 @@ class DetailPostView extends React.Component<any, any, any> {
             </CardContent>
             </CardActionArea>
             <CardActions>
-            {
+            {/* {
                 this.enableBookingBtn()
-            }
+            } */}
             </CardActions>
         </Card>
         </div>

@@ -76,8 +76,6 @@ export class PostControllerClass extends BaseController {
 	public async ReadPost(id: string) {
 		try {
 			let result = await this._Collection.doc(id).get();
-
-			////console.log(result);
 			return result.data() as PostModel;
 		} catch (error) {
 			console.log(error);
