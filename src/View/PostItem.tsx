@@ -7,7 +7,6 @@ class PostItem extends React.Component <any, any, any>{
 
     static propTypes: { 
         Post: PostModel;
-        // key: string;
     };
     //Passing a PostModel here and populate data
     private post:PostModel; 
@@ -31,15 +30,18 @@ class PostItem extends React.Component <any, any, any>{
                 <CardActionArea>
                 <CardMedia
                     // className={classes.media}
-                    // image="/static/images/cards/contemplative-reptile.jpg"
+                    image={this.post.ImageURL}
                     title={this.post.PropertyName}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                     {this.post.PropertyName}
                     </Typography>
+                    <Typography variant="body1" color="textSecondary" component="p">
+                    {this.post.Price}
+                    </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                    This is the place holder for description
+                    {this.post.Description}
                     </Typography>
                 </CardContent>
                 </CardActionArea>
