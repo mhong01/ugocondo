@@ -63,13 +63,12 @@ class DetailPostView extends React.Component<any, any, any> {
 
         let contractUpdated = await ContractControllerInstance.CreateContract(contract);
         console.log(contractUpdated);
+        
     }
 
     enableBookingBtn(){
         console.log(this.state.postOwnerId)
         console.log(this.state.currentUserId)
-        // if (this.state.postOwnerId != undefined 
-        //     && this.state.currentUserId != undefined){
         if( this.state.postOwnerId != this.state.currentUserId){
             return ( <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
                     Book
