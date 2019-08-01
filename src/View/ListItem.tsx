@@ -64,7 +64,7 @@ export default class ListItem extends React.Component<any, any, any>{
 			_root: {
 				flexGrow: 1,
 				margin: 10,
-				overflowY: "clip"
+				marginTop: 64,
 			} as CSSProperties,
 			paper: {
 				padding: 2,
@@ -74,7 +74,7 @@ export default class ListItem extends React.Component<any, any, any>{
 		};
 		return (
 			<div style={styles._root}>
-				<div style={{overflowY: "hidden"}}>
+				<div>
 					<Grid container spacing={2}>
 						{this.latestPosts.map(tile => (
 							<Grid item xs={6}><PostItem Post={tile} /></Grid>
