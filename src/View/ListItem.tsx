@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Grid, Paper, Card, CardContent, Typography } from "@material-ui/core";
-import { spacing } from "@material-ui/system";
 import PostControllerInstance from "../Controller/PostController";
 import { PostModel } from "../Model/Post";
-import PostItem from "./PostItem";
-import { threadId } from "worker_threads";
+import {
+	Redirect
+  } from "react-router-dom";
+import UserControllerInstance from "../Controller/UserController";
 
 export default class ListItem extends React.Component<any, any, any>{
 
@@ -14,7 +15,9 @@ export default class ListItem extends React.Component<any, any, any>{
         super(props);
         this.latestPosts = new Array();
         this.state = {
-            latestPost : Array,
+			latestPost : Array,
+			redirectToReferrer: !UserControllerInstance._IsSignedIn,
+			to: "/login"
         }
         
     }
@@ -54,6 +57,8 @@ export default class ListItem extends React.Component<any, any, any>{
     }
 
     render(){
+		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
+
         var styles = {
             _root:{
                 flexGrow: 1,

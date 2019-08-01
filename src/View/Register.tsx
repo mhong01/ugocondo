@@ -144,7 +144,7 @@ class RegisterPage extends React.Component<any, any>{
 						<Grid container justify="flex-end">
 							<Grid item>
 								<Link component={RouterLink}
-									{...{ to: '/register' } as any}>
+									{...{ to: '/login' } as any}>
 									Already have an account? Sign in
 								</Link>
 							</Grid>
