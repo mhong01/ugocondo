@@ -57,6 +57,7 @@ export default class ListItem extends React.Component<any, any, any>{
         var styles = {
             _root:{
                 flexGrow: 1,
+                margin: 10,
             },
             paper: {
                 padding: 2,
@@ -66,26 +67,9 @@ export default class ListItem extends React.Component<any, any, any>{
         };
         return(
             <div style={styles._root}>
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                     {this.latestPosts.map(tile => (
-						<Card>
-							<CardContent>
-								<Typography color="textSecondary" gutterBottom>
-									{tile.PropertyName}
-								</Typography>
-								<Typography variant="h5" component="h2">
-
-								</Typography>
-								<Typography color="textSecondary">
-									adjective
-								</Typography>
-								<Typography variant="body2" component="p">
-									well meaning and kindly.
-									<br />
-									{'"a benevolent smile"'}
-								</Typography>
-							</CardContent>
-						</Card>
+						<Grid item xs={6}><PostItem Post={tile}/></Grid>
 					))}
                 </Grid>
             </div>

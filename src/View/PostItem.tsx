@@ -1,5 +1,7 @@
 import React from "react";
 import { PostModel } from "../Model/Post";
+import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from "@material-ui/core";
+import { Link as RouterLink } from 'react-router-dom';
 
 class PostItem extends React.Component <any, any, any>{
 
@@ -19,11 +21,39 @@ class PostItem extends React.Component <any, any, any>{
         console.log(this.post);
     }
 
+    onViewClicked(){
+
+    }
+
     render(){
         return (
-            <div>
-                
-            </div>
+            <Card>
+                <CardActionArea>
+                <CardMedia
+                    // className={classes.media}
+                    // image="/static/images/cards/contemplative-reptile.jpg"
+                    title={this.post.PropertyName}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                    {this.post.PropertyName}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                    This is the place holder for description
+                    </Typography>
+                </CardContent>
+                </CardActionArea>
+                <CardActions>
+                <Button component={RouterLink}
+                        {...{ to: '/view/' + this.post.id } as any}
+                        size="small" color="primary">
+                    View
+                </Button>
+                <Button size="small" color="primary">
+                    Like
+                </Button>
+                </CardActions>
+            </Card>
         );
     };
 }
