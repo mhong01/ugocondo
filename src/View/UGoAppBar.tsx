@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {primaryColor} from "./styles/StylesModule";
 import { withStyles } from "@material-ui/styles";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import PropTypes from 'prop-types';
+import UGoContext, { UGoConsumer } from '../Model/Context';
+import UserControllerInstance, { UserController } from '../Controller/UserController';
 
 export default class UGoAppBar extends React.Component<any, any>{
+
+    static ugoContext = UGoContext;
     static propTypes: { 
         isUserLoggedIn: PropTypes.Requireable<boolean>; 
     
@@ -14,20 +18,24 @@ export default class UGoAppBar extends React.Component<any, any>{
         super(props);
         this.state = {
             isUserLoggedIn: false,
-            userName: '',
+            userName: false,
         };
+        console.log(this.state);
+        console.log(UserControllerInstance._IsSignedIn,);
     }
 
     componentWillMount(){
-        this.setState({
-            isUserLoggedIn: this.props,
-        });
+        
+        console.log("will mount");
         console.log(this.state);
     }
 
     componentDidMount(){
-        console.log(this.props);
-        
+        console.log("did mount " );
+        console.log(this.state);
+        this.setState({
+            isUserLoggedIn: UserControllerInstance._IsSignedIn,
+        });
     }
 
 
@@ -51,12 +59,13 @@ export default class UGoAppBar extends React.Component<any, any>{
                 <Typography variant="h4" noWrap>
                     UGoCondo
                 </Typography>
-                {
-                    this.state.isUserLoggedIn ?
-                    <TypographyUserName paragraph >
-                        Hello,
-                    </TypographyUserName> : null
-                }
+                    {/* {console.log(this.state.isUserLoggedIn)}
+                    {this.state.isUserLoggedIn ? <TypographyUserName paragraph >
+                                Hello,
+                            </TypographyUserName>
+                    :
+                         null
+                    } */}
                 </Toolbar>
             </AppBarBkgn>
         );

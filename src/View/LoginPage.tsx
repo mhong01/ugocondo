@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
 	Container, Button, Typography, TextField, FormControlLabel,
 	Checkbox, Grid, Link
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import UserControllerInstance from '../Controller/UserController';
+import HomePage from './HomePage';
+import UGoContext, { UGoProvider } from '../Model/Context';
 
 class LoginPage extends React.Component<any, any, any>
 {
 	private password: string;
 	private userName: string;
+
 	constructor(props) {
 		super(props);
 
@@ -17,7 +20,6 @@ class LoginPage extends React.Component<any, any, any>
 			errorMsg: null,
 			isLoggedIn: false
 		}
-
 		this.OnSignIn = this.OnSignIn.bind(this);
 	}
 
@@ -53,7 +55,9 @@ class LoginPage extends React.Component<any, any, any>
 		let content = null;
 		if(this.state.isLoggedIn) {
 			content = <h1>Your are logged in!</h1>
+			console.log(this.state);
 		} else {
+			console.log(this.state);
 			content = (
 				<div >
 					<Typography component="h1" variant="h5">

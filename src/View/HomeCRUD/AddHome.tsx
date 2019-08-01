@@ -46,8 +46,9 @@ export default class AddHome extends React.Component<any, any, any>{
 
 		this.OnAddHouseClick = this.OnAddHouseClick.bind(this)
 	}
-
+	
 	async OnAddHouseClick() {
+		console.log(UserControllerInstance._User.id);
 		console.log(this.state)
 		if (this.state.PropertyName == null) {
 			this.setState({ PropertyNameCheck: "Cannot be empty!" });

@@ -1,53 +1,65 @@
-import React, { Component } from "react";
-import { GridList, CardContent, Typography } from "@material-ui/core";
+import React, { CSSProperties } from "react";
+import { GridList, CardContent, Typography, Grid } from "@material-ui/core";
 import PostControllerInstance from "../Controller/PostController";
-import { Card } from "semantic-ui-react";
+import PostItem from "./PostItem";
+import UserControllerInstance, { UserController } from "../Controller/UserController";
+import {
+	Redirect
+} from "react-router-dom";
+import { thisExpression } from "@babel/types";
 
-class MyPage extends Component<any, any, any> {
+export default class MyPage extends React.Component<any, any, any> {
 
+	private myPosts: Array<any>;
 	constructor(props) {
 		super(props);
-
+		this.myPosts = new Array();
 		this.state = {
-			tileData: []
+			myPosts: Array,
+			userEmail: null,
+			redirectToReferrer: !UserControllerInstance._IsSignedIn,
+			to: "/login"
 		}
+		// console.log(UserControllerInstance.UserEmail);
 	}
 
 	async componentWillMount() {
-		let homes = await PostControllerInstance.GetPostsByUserID("testuser");
-		console.log(homes);
-		this.setState({ tileDate: homes });
+		if (UserControllerInstance._User != undefined){
+			this.myPosts = new Array();
+			let _userId = UserControllerInstance._User.id;
+			let myPosts: Array<any> = await PostControllerInstance.GetPostsByUserID(_userId);
+			this.setState({
+				myPosts: myPosts,
+			})
+			console.log(this.state.myPosts);
+			this.myPosts = this.state.myPosts;
+		}
 	}
-
 	render() {
+		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
+
+		var styles = {
+			_root: {
+				flexGrow: 1,
+				margin: 10,
+				overflowY: "clip"
+			} as CSSProperties,
+			paper: {
+				padding: 2,
+				textAlign: 'center',
+				color: 'black',
+			},
+		};
 		return (
-			<div>
-				<GridList cellHeight={200} spacing={1}>
-					{this.state.tileData.map(tile => (
-						<Card>
-							<CardContent>
-								<Typography color="textSecondary" gutterBottom>
-									{tile.PropertyName}
-								</Typography>
-								<Typography variant="h5" component="h2">
-
-								</Typography>
-								<Typography color="textSecondary">
-									adjective
-								</Typography>
-								<Typography variant="body2" component="p">
-									well meaning and kindly.
-									<br />
-									{'"a benevolent smile"'}
-								</Typography>
-							</CardContent>
-						</Card>
-					))}
-				</GridList>
-			</div>);
+			<div style={styles._root}>
+				<div style={{overflowY: "hidden"}}>
+					<Grid container spacing={2}>
+						{this.myPosts.map(tile => (
+							<Grid item xs={6}><PostItem Post={tile} /></Grid>
+						))}
+					</Grid>
+				</div>
+			</div>
+		);
 	}
-
-
 }
-
-export default MyPage;

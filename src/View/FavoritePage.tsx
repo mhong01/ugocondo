@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class FavoritePage extends Component{
+class RequestPage extends Component<any, any, any>{
 
     constructor(props){
         super(props);
@@ -19,4 +19,4 @@ class FavoritePage extends Component{
 }
 
 
-export default FavoritePage;
+export default RequestPage;
