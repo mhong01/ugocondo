@@ -10,6 +10,9 @@ export class ContractModel {
 	public Update(obj: ContractModel) {
 		this.id = obj.id;
 		this.Status = obj.Status;
+		this.OnwerID = obj.OnwerID;
+		this.RenterID = obj.RenterID;
+		this.PostID = obj.PostID;
 	}
 }
 
