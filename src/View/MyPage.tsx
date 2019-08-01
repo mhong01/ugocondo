@@ -10,7 +10,7 @@ import { thisExpression } from "@babel/types";
 
 export default class MyPage extends React.Component<any, any, any> {
 
-	private myPosts: Array<any>;
+	private myPosts: Array<any> = [];
 	constructor(props) {
 		super(props);
 		this.myPosts = new Array();
@@ -21,20 +21,25 @@ export default class MyPage extends React.Component<any, any, any> {
 			to: "/login"
 		}
 		// console.log(UserControllerInstance.UserEmail);
+
+		this.GetData();
 	}
 
-	async componentWillMount() {
-		if (UserControllerInstance._User != undefined) {
+	async GetData() {
+		if (UserControllerInstance._User != undefined){
 			this.myPosts = new Array();
 			let _userId = UserControllerInstance._User.id;
 			let myPosts: Array<any> = await PostControllerInstance.GetPostsByUserID(_userId);
+			console.log(this.state.myPosts);
+			
 			this.setState({
 				myPosts: myPosts,
 			})
-			console.log(this.state.myPosts);
+
 			this.myPosts = this.state.myPosts;
 		}
 	}
+
 	render() {
 		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
 
@@ -51,16 +56,17 @@ export default class MyPage extends React.Component<any, any, any> {
 				textAlign: 'center',
 				color: 'black',
 			},
-			listWidth: {
+			listWidth:{
 				width: '99%'
 			}
 		};
+
 		return (
 			<div style={styles._root}>
-				<div style={{ overflowY: "hidden" }}>
+				<div style={{overflowY: "hidden"}}>
 					<Grid style={styles.listWidth} container spacing={2}>
-						{this.myPosts.map((tile, i) => (
-							<Grid key={i} item xs={6}><PostItem Post={tile} /></Grid>
+						{this.myPosts.map(tile => (
+							<Grid item xs={6}><PostItem Post={tile} /></Grid>
 						))}
 					</Grid>
 				</div>

@@ -2,12 +2,13 @@ import React, { Component, CSSProperties } from "react";
 import { PostModel } from "../Model/Post";
 import UserControllerInstance from "../Controller/UserController";
 import {Redirect} from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import PostItem from "./PostItem";
 import ContractControllerInstance from "../Controller/ContractController";
 import PostControllerInstance from "../Controller/PostController";
 import ContractItem from "./ContractItem";
 import ContractAndPost from "../Model/ContractAndPost";
+import { thisExpression } from "@babel/types";
 
 class RequestPage extends Component<any, any, any>{
 
@@ -80,11 +81,17 @@ class RequestPage extends Component<any, any, any>{
 		return (
 			<div style={styles._root}>
 				<div style={{overflowY: "hidden"}}>
-					<Grid style={styles.listWidth} container spacing={2}>
+					{this.allPosts[0] == null ?
+						<Grid style={styles.listWidth} container spacing={2}>
 						{this.allPosts.map(tile => (
 							<Grid item xs={6}><ContractItem Post={tile} /></Grid>
 						))}
-					</Grid>
+					</Grid>: 
+					<Typography gutterBottom variant="h5" component="h2">
+						{"There is no incoming request at this time!"}
+					</Typography>
+					}
+					
 				</div>
 			</div>
 		);

@@ -178,9 +178,8 @@ export class PostControllerClass extends BaseController {
 	public async GetPostsByPostID(id: string) {
 		console.log("In GetPostsByPostID: " + id);
 		try {
-			let result = await this._Collection.where("id", "==", id).limit(1000).get();
+			let result = await this._Collection.where("id", "==", id).orderBy('CreatedAt', 'desc').get();
 			let data = this.ConvertToPostViewModel(result);
-			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
 			console.log("result" + result);
 			console.log("----" + data);
@@ -207,61 +206,6 @@ export class PostControllerClass extends BaseController {
 		}
 
 		//return TempLatestPosts;
-	}
-
-	public async GetFavoritePosts() {
-		////console.log("In GetSavedPost");
-		let promises: Promise<firebase.firestore.DocumentSnapshot>[];
-		try {
-			let favPosts;// = await UserControllerInstance.GetUserSavedPostIDs();
-			promises = favPosts.map(id => {
-				return this._Collection.doc(id).get();
-			});
-
-			let results = await Promise.all(promises);
-			let data = results.map(docSnapshot => {
-				let temp = docSnapshot.data() as PostModel;
-				return temp;
-			});
-
-			return data;
-		} catch (e) {
-			//console.log(e);
-		}
-	}
-
-	public async GetSellerSellingPost(id: string) {
-		try {
-			let result = await this._Collection
-				.where("OwnerID", "==", id)
-				.where("State", "==", PostStateEnum.Available)
-				.limit(40).get();
-			let data = this.ConvertToPostViewModel(result);
-			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
-
-			//console.log(data);
-			return data;
-		} catch (error) {
-			//console.log(error);
-			return null;
-		}
-	}
-
-	public async GetSellerSoldPost(id: string) {
-		try {
-			let result = await this._Collection
-				.where("OwnerID", "==", id)
-				.where("State", "==", PostStateEnum.Rented)
-				.limit(40).get();
-			let data = this.ConvertToPostViewModel(result);
-			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
-
-			//console.log(data);
-			return data;
-		} catch (error) {
-			//console.log(error);
-			return null;
-		}
 	}
 
 	// Helper
