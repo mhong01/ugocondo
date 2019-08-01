@@ -44,7 +44,10 @@ class DetailPostView extends React.Component<any, any, any> {
                 padding: 2,
                 textAlign: 'center',
                 color: 'black',
-              },
+            },
+            media: {
+            height: 140,
+            },
         };
         if(this.state.post == null) return null;
 
@@ -53,26 +56,47 @@ class DetailPostView extends React.Component<any, any, any> {
             <Card>
             <CardActionArea>
             <CardMedia
-                // className={classes.media}
-                // image="/static/images/cards/contemplative-reptile.jpg"
+                style={styles.media}
+                image={this.state.post.ImageURL}
                 title={this.state.post.PropertyName}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                 {this.state.post.PropertyName}
                 </Typography>
+                <Typography variant="body1" color="textSecondary" component="p">
+                    {this.state.post.Price}
+                </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                This is the place holder for description
+                {this.state.post.Description}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                Here are the facilities
+                <br/>
+                Bedrooms: {this.state.post.NumOfBed}
+                <br/>
+                Bathroom: {this.state.post.NumOfBath}
+                <br/>
+                Parking slots: {this.state.post.NumOfParking}
+                <br/>
+                Parking Type: {this.state.post.ParkingType}
+                <br/>
+                Unit: {this.state.post.Unit}
+                <br/>
+                Address: {this.state.post.Address} {this.state.post.City} {this.state.post.ProvinceState}
+                <br/>
+                Postal Code: {this.state.post.Zip}
+
                 </Typography>
             </CardContent>
             </CardActionArea>
             <CardActions>
             <Button 
                     size="small" color="primary">
-                View
+                Book
             </Button>
             <Button size="small" color="primary">
-                Like
+                Add to Favorite
             </Button>
             </CardActions>
         </Card>

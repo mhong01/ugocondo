@@ -267,13 +267,13 @@ export class PostControllerClass extends BaseController {
 	private ConvertToPostViewModel(result: firebase.firestore.QuerySnapshot) {
 		let data = new Array<PostModel>();
 		result.forEach(function (doc) {
-			console.log(doc.data());
+			// console.log(doc.data());
 			let docData = doc.data() as PostModel;
 			// Work around when a post is not correct save to database
 			if (docData != null) {
 				data.push(doc.data() as PostModel);
 			}
-			console.log(docData);
+			// console.log(docData);
 		});
 		return data;
 	}

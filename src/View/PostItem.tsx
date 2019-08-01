@@ -30,7 +30,7 @@ class PostItem extends React.Component <any, any, any>{
                 <CardActionArea>
                 <CardMedia
                     // className={classes.media}
-                    // image="/static/images/cards/contemplative-reptile.jpg"
+                    image={this.post.ImageURL}
                     title={this.post.PropertyName}
                 />
                 <CardContent>
@@ -38,10 +38,10 @@ class PostItem extends React.Component <any, any, any>{
                     {this.post.PropertyName}
                     </Typography>
                     <Typography variant="body1" color="textSecondary" component="p">
-                    price
+                    {this.post.Price}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                    This is the place holder for description
+                    {this.post.Description}
                     </Typography>
                 </CardContent>
                 </CardActionArea>
