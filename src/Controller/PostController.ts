@@ -50,6 +50,9 @@ export class PostControllerClass extends BaseController {
 		newHouse.NumOfBath = data.NumOfBath;
 		newHouse.NumOfParking = data.NumOfParking;
 		newHouse.ParkingType = data.ParkingType;
+		newHouse.Price = data.Price;
+		newHouse.Description = data.Description;
+		newHouse.ImageURL = data.ImageURL;
 		newHouse.CreatedAt = firebase.firestore.Timestamp.fromDate(new Date());
 		newHouse.UpdatedAt = firebase.firestore.Timestamp.fromDate(new Date());
 

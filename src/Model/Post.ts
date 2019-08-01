@@ -5,6 +5,7 @@ export class PostModel extends BaseModel {
 	public PropertyName:  string;
 	// public Condition: ConditionEnum = ConditionEnum.Unknown;
 	public Description: string;
+	public ImageURL: string;
 	public Price: string;
 	public Unit: string;
 	public Address: string;
@@ -34,6 +35,9 @@ export class PostModel extends BaseModel {
 		this.NumOfBath = (obj.NumOfBath != null) ? obj.NumOfBath : null;
 		this.NumOfParking = (obj.NumOfParking != null) ? obj.NumOfParking : null;
 		this.ParkingType = (obj.ParkingType != null) ? obj.ParkingType : null;
+		this.Price = (obj.Price != null) ? obj.Price : null;
+		this.Description = (obj.Description != null) ? obj.Description : null;
+		this.ImageURL = (obj.ImageURL != null) ? obj.ImageURL : null;
 	}
 }
 
