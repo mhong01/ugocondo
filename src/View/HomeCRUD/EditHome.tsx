@@ -69,6 +69,7 @@ export default class EditHome extends React.Component<any, any, any>{
 		this.setState({ Price: house.Price })
 		this.setState({ Description: house.Description })
 		this.setState({ ImageURL: house.ImageURL })
+		this.setState({ OwnerID: house.OwnerID })
 
 		console.log(house);
 
@@ -184,6 +185,7 @@ export default class EditHome extends React.Component<any, any, any>{
 
 
 		let newHouse = new PostModel();
+		newHouse.OwnerID = this.state.OwnerID;
 		newHouse.id = this.state.id;
 		newHouse.PropertyName = this.state.PropertyName;
 		newHouse.Unit = this.state.Unit;
