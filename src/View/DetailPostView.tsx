@@ -138,9 +138,11 @@ class DetailPostView extends React.Component<any, any, any> {
             </CardContent>
             </CardActionArea>
             <CardActions>
-            {/* {
-                this.enableBookingBtn()
-            } */}
+            {   this.state.postOwnerId != UserControllerInstance.UserID ?
+               <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
+               Book
+               </Button> : null
+            }
             </CardActions>
         </Card>
         </div>
