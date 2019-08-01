@@ -24,7 +24,7 @@ export default class MyPage extends React.Component<any, any, any> {
 	}
 
 	async componentWillMount() {
-		if (UserControllerInstance._User != undefined){
+		if (UserControllerInstance._User != undefined) {
 			this.myPosts = new Array();
 			let _userId = UserControllerInstance._User.id;
 			let myPosts: Array<any> = await PostControllerInstance.GetPostsByUserID(_userId);
@@ -51,16 +51,16 @@ export default class MyPage extends React.Component<any, any, any> {
 				textAlign: 'center',
 				color: 'black',
 			},
-			listWidth:{
+			listWidth: {
 				width: '99%'
 			}
 		};
 		return (
 			<div style={styles._root}>
-				<div style={{overflowY: "hidden"}}>
+				<div style={{ overflowY: "hidden" }}>
 					<Grid style={styles.listWidth} container spacing={2}>
-						{this.myPosts.map(tile => (
-							<Grid item xs={6}><PostItem Post={tile} /></Grid>
+						{this.myPosts.map((tile, i) => (
+							<Grid key={i} item xs={6}><PostItem Post={tile} /></Grid>
 						))}
 					</Grid>
 				</div>
