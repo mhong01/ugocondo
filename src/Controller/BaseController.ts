@@ -10,7 +10,8 @@ export default class BaseController extends Base {
 	protected DatabaseCollectionName = {
 		Users: 'Users',
 		Posts: 'Posts',
-		Chats: 'Chats'
+		Chats: 'Chats',
+		Contracts: 'Contracts'
 	}
 
 }
