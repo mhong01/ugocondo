@@ -38,6 +38,7 @@ export class PostModel extends BaseModel {
 		this.Price = (obj.Price != null) ? obj.Price : null;
 		this.Description = (obj.Description != null) ? obj.Description : null;
 		this.ImageURL = (obj.ImageURL != null) ? obj.ImageURL : null;
+		this.OwnerID = (obj.OwnerID != null) ? obj.OwnerID : null;
 	}
 }
 

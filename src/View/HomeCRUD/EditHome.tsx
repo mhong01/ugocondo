@@ -3,7 +3,7 @@ import { CssBaseline, Typography, Container, TextField, Grid, Button } from '@ma
 import { Input } from 'semantic-ui-react'
 import PostControllerInstance from '../../Controller/PostController';
 import { PostModel } from '../../Model/Post';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export default class EditHome extends React.Component<any, any, any>{
 
@@ -39,10 +39,14 @@ export default class EditHome extends React.Component<any, any, any>{
 			Price: null,
 			Description: null,
 			ImageURL: null,
+			updateInform: "",
+			redirectToReferrer: false,
+			to: "/my"
 		}
 
 		this.OnSaveHouseClick = this.OnSaveHouseClick.bind(this)
 		this.OnDeleteHouseClick = this.OnDeleteHouseClick.bind(this)
+		this.ClearUpdateInform = this.ClearUpdateInform.bind(this)
 	}
 
 	async componentWillMount() {
@@ -67,6 +71,7 @@ export default class EditHome extends React.Component<any, any, any>{
 		this.setState({ Price: house.Price })
 		this.setState({ Description: house.Description })
 		this.setState({ ImageURL: house.ImageURL })
+		this.setState({ OwnerID: house.OwnerID })
 
 		console.log(house);
 
@@ -182,6 +187,7 @@ export default class EditHome extends React.Component<any, any, any>{
 
 
 		let newHouse = new PostModel();
+		newHouse.OwnerID = this.state.OwnerID;
 		newHouse.id = this.state.id;
 		newHouse.PropertyName = this.state.PropertyName;
 		newHouse.Unit = this.state.Unit;
@@ -200,14 +206,23 @@ export default class EditHome extends React.Component<any, any, any>{
 		newHouse.ImageURL = this.state.ImageURL;
 
 		PostControllerInstance.UpdatePost(newHouse)
+		this.setState({updateInform: "Updated"})
+		setTimeout(this.ClearUpdateInform, 3000)
 	}
 
 	OnDeleteHouseClick() {
 		PostControllerInstance.DeletePost(this.state.id)
-		return <Redirect to='/' />
+		this.setState({redirectToReferrer: true})
+		this.setState({to: "/"})
+	}
+
+	ClearUpdateInform() {
+		this.setState({updateInform: ""});
 	}
 
 	render() {
+		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
+
 		return (
 			<div style={Styles.Container}>
 				<TextField
@@ -365,9 +380,12 @@ export default class EditHome extends React.Component<any, any, any>{
 				</div>
 
 				<div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
-					<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
-						Edit House
-					</Button>
+					<div style={{display: "flex", flexDirection: "column"}}>
+						<Button onClick={this.OnSaveHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
+							Edit House
+						</Button>
+						{this.state.updateInform}
+					</div>
 					<Button onClick={this.OnDeleteHouseClick} style={Styles.SubmitButton} variant="contained" color="primary">
 						Delete House
 					</Button>

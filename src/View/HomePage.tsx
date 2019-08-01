@@ -25,7 +25,7 @@ export default class HomePage extends React.Component<any, any> {
 		this.state = {
 			CurrentView: "AddHome",
 			isUserLoggedIn: this.isUserLoggedIn,
-			userEmail : this.userEmail,
+			userEmail: this.userEmail,
 		}
 	}
 
@@ -40,31 +40,32 @@ export default class HomePage extends React.Component<any, any> {
 	render() {
 		const styles_ = {
 			toolbar: {
-				minHeight: 200,
+				minHeight: 64,
 				width: "100%"
 			}
 		}
 
 		return (
 			<div style={styles.Container}>
-			<BrowserRouter>
-			<UGoAppBar/>
-				<UGoDrawer />
-					<Switch>
-				<main style={styles.Main}>
-					<div style={styles_.toolbar} />
-						<Route exact path='/' component={ListItem}></Route>
-						<Route path='/postNewHome' component={AddHome}></Route>
-						<Route path='/edithome' component={EditHome}></Route>
-						<Route path='/request' component={RequestPage}></Route>
-						<Route path='/my' component={MyPage}></Route>
-						<Route path='/login' component={LoginPage}></Route>
-						<Route path='/signup' component={RegisterPage}></Route>
-						<Route path='/logout' component={ListItem}></Route>
-						<Route path='/view/:id' component={DetailPostView}></Route>
-				</main>
-					</Switch>
-			</BrowserRouter>
+				<BrowserRouter>
+					<UGoAppBar />
+					<div  style={styles.LowerContainer}>
+						<UGoDrawer />
+						<Switch>
+							<div style={styles.Main}>
+								<Route exact path='/' component={ListItem}></Route>
+								<Route path='/postNewHome' component={AddHome}></Route>
+								<Route path='/edithome' component={EditHome}></Route>
+								<Route path='/request' component={RequestPage}></Route>
+								<Route path='/my' component={MyPage}></Route>
+								<Route path='/login' component={LoginPage}></Route>
+								<Route path='/signup' component={RegisterPage}></Route>
+								<Route path='/logout' component={ListItem}></Route>
+								<Route path='/view/:id' component={DetailPostView}></Route>
+							</div>
+						</Switch>
+					</div>
+				</BrowserRouter>
 			</div>
 		);
 	}
@@ -81,7 +82,8 @@ const styles = {
 		height: "100%",
 		width: "100%",
 		display: 'flex',
-		flexDirection: 'row'
+		flexDirection: 'row',
+		paddingLeft: drawerWidth
 	} as CSSProperties,
 	FullSize: {
 		height: "100%",
@@ -104,7 +106,6 @@ const styles = {
 	} as CSSProperties,
 	Main: {
 		flexGrow: 1,
-		marginLeft: drawerWidth,
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",

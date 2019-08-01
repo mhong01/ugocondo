@@ -41,8 +41,10 @@ export default class MyPage extends React.Component<any, any, any> {
 		var styles = {
 			_root: {
 				flexGrow: 1,
-				margin: 10,
-				overflowY: "clip"
+				margin: 50,
+				overflowY: "clip",
+				height: "100%",
+				width: "100%",
 			} as CSSProperties,
 			paper: {
 				padding: 2,

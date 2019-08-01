@@ -173,7 +173,7 @@ export default class AddHome extends React.Component<any, any, any>{
 		newHouse.Description = this.state.Description;
 		newHouse.ImageURL = this.state.ImageURL;
 
-		newHouse.OwnerID = UserControllerInstance._User.id
+		newHouse.OwnerID = UserControllerInstance._User.id;
 
 		console.log(newHouse);
 

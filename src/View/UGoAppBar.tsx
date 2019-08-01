@@ -52,18 +52,11 @@ export default class UGoAppBar extends React.Component<any, any>{
         }) (Typography);
 
         return(
-            <AppBarBkgn position="absolute">
+            <AppBarBkgn position="static">
                 <Toolbar>
                 <Typography variant="h4" noWrap>
                     UGoCondo
                 </Typography>
-                    {/* {console.log(this.state.isUserLoggedIn)}
-                    {this.state.isUserLoggedIn ? <TypographyUserName paragraph >
-                                Hello,
-                            </TypographyUserName>
-                    :
-                         null
-                    } */}
                 </Toolbar>
             </AppBarBkgn>
         );

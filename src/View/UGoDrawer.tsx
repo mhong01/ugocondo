@@ -125,11 +125,6 @@ class UGoDrawer extends Component<any, any, any> {
 						<ListItemText primary="Log-out" />
 					</ListItem>
 				</List>
-
-				<main style={styles.content}>
-					<div style={styles.toolbar} />
-
-				</main>
 			</ClippedDrawer>
 		);
 	}
