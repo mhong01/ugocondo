@@ -174,6 +174,22 @@ export class PostControllerClass extends BaseController {
 		}
 	}
 
+	public async GetPostsByPostID(id: string) {
+		console.log("In GetPostsByPostID: " + id);
+		try {
+			let result = await this._Collection.where("id", "==", id).limit(40).get();
+			let data = this.ConvertToPostViewModel(result);
+			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
+
+			console.log("result" + result);
+			console.log("----" + data);
+			return data;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	}
+
 	public async GetLatestPosts() {
 		console.log("In GetLatestPosts");
 		try {
