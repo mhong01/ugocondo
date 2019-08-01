@@ -31,7 +31,8 @@ export default class HomePage extends React.Component<any> {
 
 		const styles_ = {
 			toolbar: {
-				minHeight: 64,
+				minHeight: "200",
+				width: "100%"
 			}
 		}
 
@@ -64,7 +65,7 @@ const styles = {
 		height: "100%",
 		width: "100%",
 		display: 'flex',
-		// overflowY: 'hidden'
+		overflowY: 'hidden'
 		// flexDirection: 'column'
 	} as CSSProperties,
 	FullSize: {
@@ -90,8 +91,10 @@ const styles = {
 		flexGrow: 1,
 		marginLeft: drawerWidth,
 		display: "flex",
+		flexDirection: "column",
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
+		overflowY: "scroll"
 	} as CSSProperties
 }
 
