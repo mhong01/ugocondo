@@ -3,12 +3,10 @@ import {primaryColor} from "./styles/StylesModule";
 import { withStyles } from "@material-ui/styles";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import PropTypes from 'prop-types';
-import UGoContext, { UGoConsumer } from '../Model/Context';
 import UserControllerInstance, { UserController } from '../Controller/UserController';
 
 export default class UGoAppBar extends React.Component<any, any>{
 
-    static ugoContext = UGoContext;
     static propTypes: { 
         isUserLoggedIn: PropTypes.Requireable<boolean>; 
     
