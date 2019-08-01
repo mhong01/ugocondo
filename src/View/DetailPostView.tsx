@@ -2,6 +2,8 @@ import React from "react";
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from "@material-ui/core";
 import PostControllerInstance from "../Controller/PostController";
 import { PostModel } from "../Model/Post";
+import UserControllerInstance from "../Controller/UserController";
+import {Redirect} from "react-router-dom";
 
 class DetailPostView extends React.Component<any, any, any> {
 
@@ -13,7 +15,12 @@ class DetailPostView extends React.Component<any, any, any> {
         super(props);
         this.state = {
             post: PostModel,
+            currentUserId: null,
+            postOwnerId: null,
+            redirectToReferrer: !UserControllerInstance._IsSignedIn,
+			to: "/login"
         }
+        this.enableBookingBtn = this.enableBookingBtn.bind(this);
     }
 
     async componentWillMount(){
@@ -21,8 +28,18 @@ class DetailPostView extends React.Component<any, any, any> {
         console.log("params " + params.id )
         let post = await this.getPostById(params.id);
         console.log(post);
+        
         this.setState({
             post: post
+        });
+        if (!this.state.redirectToReferrer){
+            this.setState({
+                currentUserId: UserControllerInstance.UserID
+            });
+        }
+        
+        this.setState({
+            postOwnerId: post.OwnerID
         });
         this.post = this.state.post;
         console.log(this.post);
@@ -33,7 +50,29 @@ class DetailPostView extends React.Component<any, any, any> {
        
     }
 
+    onBookingClicked(){
+        console.log("clicked");
+    }
+
+    enableBookingBtn(){
+        console.log(this.state.postOwnerId)
+        console.log(this.state.currentUserId)
+        // if (this.state.postOwnerId != undefined 
+        //     && this.state.currentUserId != undefined){
+        if( this.state.postOwnerId != this.state.currentUserId){
+            return ( <Button color="primary" onClick={(e)=>this.onBookingClicked()}>
+                    Book
+                    </Button>);
+        } else {
+            return null;
+        }
+        // } 
+    }
+
     render(){
+        if (this.state.redirectToReferrer) {
+			return <Redirect to={this.state.to} />;
+		}
         
         var styles = {
             _root:{
@@ -91,13 +130,9 @@ class DetailPostView extends React.Component<any, any, any> {
             </CardContent>
             </CardActionArea>
             <CardActions>
-            <Button 
-                    size="small" color="primary">
-                Book
-            </Button>
-            <Button size="small" color="primary">
-                Add to Favorite
-            </Button>
+            {
+                this.enableBookingBtn()
+            }
             </CardActions>
         </Card>
         </div>
