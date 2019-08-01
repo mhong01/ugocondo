@@ -6,6 +6,7 @@ import {
 	Redirect
   } from "react-router-dom";
 import UserControllerInstance from "../Controller/UserController";
+import PostItem from "./PostItem";
 
 export default class ListItem extends React.Component<any, any, any>{
 

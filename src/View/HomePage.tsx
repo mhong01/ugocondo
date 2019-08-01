@@ -91,7 +91,7 @@ const styles = {
 		marginLeft: drawerWidth,
 		display: "flex",
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	} as CSSProperties
 }
 
