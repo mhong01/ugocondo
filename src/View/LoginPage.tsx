@@ -6,7 +6,6 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import UserControllerInstance from '../Controller/UserController';
 import HomePage from './HomePage';
-import UGoContext, { UGoProvider } from '../Model/Context';
 
 class LoginPage extends React.Component<any, any, any>
 {

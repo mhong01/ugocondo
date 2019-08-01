@@ -12,7 +12,6 @@ import MyPage from './MyPage';
 import RegisterPage from './Register';
 import LoginPage from './LoginPage';
 import DetailPostView from './DetailPostView';
-import UGoContext, { UGoProvider } from '../Model/Context';
 
 export default class HomePage extends React.Component<any, any> {
 
