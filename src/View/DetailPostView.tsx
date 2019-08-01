@@ -6,7 +6,7 @@ import { PostModel } from "../Model/Post";
 class DetailPostView extends React.Component<any, any, any> {
 
     private postKey: string;
-    private post : PostModel;
+    private post : PostModel = null;
     private posts: Array<any> = new Array() ;
 
     constructor(props){
@@ -46,6 +46,8 @@ class DetailPostView extends React.Component<any, any, any> {
                 color: 'black',
               },
         };
+        if(this.state.post == null) return null;
+
         return (
             <div style={styles._root}>
             <Card>
@@ -53,11 +55,11 @@ class DetailPostView extends React.Component<any, any, any> {
             <CardMedia
                 // className={classes.media}
                 // image="/static/images/cards/contemplative-reptile.jpg"
-                title={this.post.PropertyName}
+                title={this.state.post.PropertyName}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                {this.post.PropertyName}
+                {this.state.post.PropertyName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                 This is the place holder for description
