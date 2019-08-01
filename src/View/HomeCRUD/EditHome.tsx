@@ -39,7 +39,9 @@ export default class EditHome extends React.Component<any, any, any>{
 			Price: null,
 			Description: null,
 			ImageURL: null,
-			updateInform: ""
+			updateInform: "",
+			redirectToReferrer: false,
+			to: "/"
 		}
 
 		this.OnSaveHouseClick = this.OnSaveHouseClick.bind(this)
@@ -210,7 +212,8 @@ export default class EditHome extends React.Component<any, any, any>{
 
 	OnDeleteHouseClick() {
 		PostControllerInstance.DeletePost(this.state.id)
-		return <Redirect to='/' />
+		this.setState({redirectToReferrer: true})
+		this.setState({to: "/"})
 	}
 
 	ClearUpdateInform() {
@@ -218,6 +221,8 @@ export default class EditHome extends React.Component<any, any, any>{
 	}
 
 	render() {
+		if (this.state.redirectToReferrer) return <Redirect to={this.state.to} />;
+		
 		return (
 			<div style={Styles.Container}>
 				<TextField

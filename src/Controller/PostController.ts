@@ -111,7 +111,7 @@ export class PostControllerClass extends BaseController {
 	}
 
 	public async DeletePost(id: string) {
-		console.log("In UpdatePost");
+		console.log("In DeletePost");
 		try {
 			await this._Collection
 				.doc(id)
