@@ -49,11 +49,14 @@ export default class MyPage extends React.Component<any, any, any> {
 				textAlign: 'center',
 				color: 'black',
 			},
+			listWidth:{
+				width: '99%'
+			}
 		};
 		return (
 			<div style={styles._root}>
 				<div style={{overflowY: "hidden"}}>
-					<Grid container spacing={2}>
+					<Grid style={styles.listWidth} container spacing={2}>
 						{this.myPosts.map(tile => (
 							<Grid item xs={6}><PostItem Post={tile} /></Grid>
 						))}

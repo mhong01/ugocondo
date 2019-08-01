@@ -61,6 +61,7 @@ export class ContractControllerClass extends BaseController {
 		}
 	}
 
+	
 	public async UpdateContract(post: ContractModel) {
 		console.log("In UpdateContract");
 		try {
@@ -125,15 +126,12 @@ export class ContractControllerClass extends BaseController {
 
 	// Get
 
-	public async GetPostsByUserID(id: string) {
-		console.log("In GetPostsByUserID: " + id);
+	public async GetContractByUserID(id: string) {
+		console.log("In GetContractByUserID: " + id);
 		try {
-			let result = await this._Collection.where("OwnerID", "==", id).limit(40).get();
+			let result = await this._Collection.where("OnwerID", "==", id).get();
 			let data = this.ConvertToPostViewModel(result);
-			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
-			console.log("result" + result);
-			console.log("----" + data);
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -146,7 +144,6 @@ export class ContractControllerClass extends BaseController {
 		try {
 			let result = await this._Collection.where("id", "==", id).limit(40).get();
 			let data = this.ConvertToPostViewModel(result);
-			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
 			console.log("result" + result);
 			console.log("----" + data);
@@ -162,7 +159,6 @@ export class ContractControllerClass extends BaseController {
 		try {
 			let result = await this._Collection.orderBy('CreatedAt', 'desc').limit(40).get();
 			let data = this.ConvertToPostViewModel(result);
-			data = data.sort((a, b) => { return b.CreatedAt.toMillis() - a.CreatedAt.toMillis() });
 
 			console.log("result" + result);
 			console.log("----" + data);
@@ -212,5 +208,5 @@ export class ContractControllerClass extends BaseController {
 	}
 }
 
-let PostControllerInstance = new ContractControllerClass();
-export default PostControllerInstance;
+let ContractControllerInstance = new ContractControllerClass();
+export default ContractControllerInstance;

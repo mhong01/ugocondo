@@ -23,11 +23,14 @@ class PostItem extends React.Component <any, any, any>{
     render(){
         var styles = {
             media: {
-                height: 140,
+                height: 300,
             },
+            cardActionAre: {
+                width: 500
+            }
         };
         return (
-            <Card>
+            <Card style={styles.cardActionAre}>
                 <CardActionArea>
                 <CardMedia
                     style={styles.media}

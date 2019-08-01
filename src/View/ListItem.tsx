@@ -71,6 +71,9 @@ export default class ListItem extends React.Component<any, any, any>{
 				textAlign: 'center',
 				color: 'black',
 			},
+			listWidth:{
+				width: '99%'
+			}
 		};
 		return (
 			<div style={styles._root}>
