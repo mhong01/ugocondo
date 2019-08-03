@@ -49,6 +49,7 @@ class RequestPage extends Component<any, any, any>{
         if (this.contracts == undefined || this.contracts == null){
             return;
         } 
+        this.allPosts = new Array();
         for (let i = 0; i < this.contracts.length; i++){
             console.log(this.contracts[i]);
             let post = await PostControllerInstance.ReadPost(this.contracts[i].PostID);
@@ -81,7 +82,7 @@ class RequestPage extends Component<any, any, any>{
 		return (
 			<div style={styles._root}>
 				<div style={{overflowY: "hidden"}}>
-					{this.allPosts[0] == null ?
+					{this.allPosts[0] != null ?
 						<Grid style={styles.listWidth} container spacing={2}>
 						{this.allPosts.map(tile => (
 							<Grid item xs={6}><ContractItem Post={tile} /></Grid>
