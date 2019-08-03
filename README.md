@@ -5,6 +5,7 @@ There are some templates that used in this project which are adapted from Materi
 In order to run this project locally, install every package needed such as npm
 Run from the terminal to install packages: 
   - npm install
+  
 Start from the terminal: 
   - npm start
 
